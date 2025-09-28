@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Publications | Kim Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ua-red: #AB0520;
+      --ua-blue: #00205B;
+      --text-dark: #111;
+      --text-light: #666;
+      --bg-light: #ffffff;
+      --side-bg: #f1f1f1;
+      --highlight: #1abc9c;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: var(--side-bg);
+      color: var(--text-dark);
+      text-align: center;
+      font-size: 1rem;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+      padding: 0 0;
+      background: var(--bg-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 1rem 1rem 1rem;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      will-change: transform, opacity;
+      background: var(--bg-light);
+      z-index: 9999;
+    }
+    header h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.05rem;
+      font-weight: 500;
+    }
+    header h2 {
+      font-weight: 300;
+      font-size: 1.2rem;
+      color: var(--text-light);
+      margin-top: 0.15rem;
+    }
+    header.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    nav.nav-bar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      border-top: 1px solid #D9E5EE;
+      border-bottom: 1px solid #D9E5EE;
+      background: var(--bg-light);
+      z-index: 9998;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 1.05rem;
+      padding-bottom: 3px;
+    }
+    nav a[href="team.html"] {
+      font-weight: 500;
+      color: #1abc9c;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .topimage {
+      position: relative; /* Needed for text overlay */
+      top: 0;
+      background: var(--bg-light);
+      z-index: 100;
+    }
+    .intro-img {
+      display: block;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      height: 300px;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(90%); /* This darkens the image */
+    }
+    .intro-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2.8rem;
+      font-weight: 600;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .main-content {
+      max-width: 900px;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem;
+      text-align: left;
+      flex: 1;
+    }
+    .main-content h1 {
+        margin-bottom: 2rem;
+        font-size: 1rem; 
+        font-weight: 600; 
+        color: var(--highlight); /* Turquoise color */
+    }
+    /* MODIFIED: The counter is now reset on the list itself */
+    .publications-list {
+        list-style: none;
+        padding-left: 0;
+        counter-reset: publication;
+    }
+    .publications-list li {
+        margin-bottom: 1.5rem;
+        padding-left: 2.5rem;
+        position: relative;
+        color: var(--text-light);
+    }
+    .publications-list li::before {
+        content: counter(publication) ".";
+        counter-increment: publication;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: 300;
+        color: var(--text-dark);
+    }
+    .publications-list a {
+        color: var(--highlight);
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .publications-list a:hover {
+        text-decoration: underline;
+    }
+    .publications-list strong {
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+    /* MODIFIED: New style for the heading within the list */
+    .publications-list li.list-heading {
+        color: var(--highlight);
+        font-weight: 600;
+        font-size: 1rem;
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+        padding-left: 0; /* Remove padding for heading */
+    }
+    /* MODIFIED: Hide the number for the heading list item */
+    .publications-list li.list-heading::before {
+        content: ""; /* No content */
+        counter-increment: none; /* Do not increment counter */
+    }
+    footer {
+      margin-top: auto;
+      font-size: 0.875rem;
+      color: #aaa;
+      padding: 1.5rem 0;
+      background: var(--bg-light);
+      border-top: 1px solid #D9E5EE;
+    }
+    @media (max-width: 600px) {
+      header h1, .intro-text {
+        font-size: 2rem;
+      }
+      header h2 {
+        font-size: 1rem;
+      }
+    }   
+    /* MODIFIED: Styles for the new 3-column grid layout */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 240px); /* Creates 3 equal columns  repeat(3, 1fr);*/
+        gap: 2rem; /* A slightly smaller gap */
+        padding: 2rem 0;
+    }
+    .team-card {
+        border: 1px solid #e0e0e0;
+        text-align: left;
+        display: flex; /* Added for better internal alignment */
+        flex-direction: column; /* Stack image and info vertically */
+    }
+    .team-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1; /* Makes images square */
+        object-fit: cover; /* Ensures image covers the area without distortion */
+        display: block;
+        padding: 0.5rem;
+    }
+    }
+    .team-card-info {
+        padding: 1rem;
+        flex-grow: 1; /* Allows this section to grow and fill space */
+        display: flex;
+        flex-direction: column;
+    }
+    .team-card-info .name {
+        font-size: 1.1rem;
+        font-weight: 600; /* Bold */
+        color: var(--highlight); /* Turquoise */
+        margin-bottom: 0; /* Ensures consistent spacing */
+    }
+    .team-card-info .title {
+        color: var(--text-dark);
+        margin: 0.25rem 0;
+        font-size: 1rem;
+        flex-grow: 1; /* Pushes the email to the bottom */
+    }
+    .team-card-info .email {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+    .team-card-info .email:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive adjustments for tablets and phones */
+    @media (max-width: 800px) {
+        .team-grid {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+        }
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      header h2 { font-size: 1rem; }
+      .team-grid {
+            grid-template-columns: 1fr; /* 1 column for phones */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <header id="lab-header">
+      <h1>Kim Lab</h1>
+      <h2>Department of Materials Science & Engineering, University of Arizona</h2>
+    </header>
+    <nav class="nav-bar">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="team.html"><strong>Team</strong></a>
+        <a href="publications.html">Publications</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+    <div class="topimage">
+      <img src="Team.png" alt="Lab visual" class="intro-img" />
+      <div class="intro-text">Team</div>
+    </div>
+    <div class="main-content">
+      <div class="team-grid">
+        
+        <div class="team-card">
+          <img src="Photo.jpeg" alt="Photo of Brian S. Y. Kim">
+          <div class="team-card-info">
+            <p class="name">Brian S. Y. Kim</p>
+            <p class="title">Assistant Professor<br>
+            Department of MSE<br>
+            Department of Physics</p>
+            <a href="mailto:briankim@arizona.edu" class="email">briankim@arizona.edu</a>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <img src="Tuyen.jpg" alt="Photo of Tuyen Huynh">
+          <div class="team-card-info">
+            <p class="name">Tuyen Huynh</p>
+            <p class="title">Graduate Student<br>
+            Department of MSE</p>
+            <a href="mailto:tuyenhuynh@arizona.edu" class="email">tuyenhuynh@arizona.edu</a>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <img src="Owen.jpg" alt="Photo of Owen Lowery">
+          <div class="team-card-info">
+            <p class="name">Owen Lowery</p>
+            <p class="title">Undergraduate Student<br>
+            Department of MSE</p>
+            <a href="mailto:owenlowery@arizona.edu" class="email">owenlowery@arizona.edu</a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <img src="Wilbur.jpeg" alt="Photo of Owen Lowery">
+          <div class="team-card-info">
+            <p class="name">David Tashchyan</p>
+            <p class="title">Undergraduate Student<br>
+            Department of MSE</p>
+            <a href="mailto:dtashchyan@arizona.edu" class="email">dtashchyan@arizona.edu</a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <img src="Wilbur.jpeg" alt="Photo of Jake Brumley">
+          <div class="team-card-info">
+            <p class="name">Jake Brumley</p>
+            <p class="title">Undergraduate Student<br>
+            Department of Optical Sciences & Engineering</p>
+            <a href="mailto:jakebrumley@arizona.edu" class="email">jakebrumley@arizona.edu</a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <img src="Wilbur.jpeg" alt="Photo of Jake Brumley">
+          <div class="team-card-info">
+            <p class="name">Nathan Lee</p>
+            <p class="title">High School Intern<br>
+            BASIS Oro Valley Upper School</p>
+            <a href="mailto:nathan.lee0555@gmail.com" class="email">nathan.lee0555@gmail.com</a>
+          </div>
+        </div>
+        
+        </div>
+    </div>
+    
+    <footer>
+      &copy; <span id="year"></span> Kim Lab • University of Arizona
+    </footer>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const header = document.getElementById('lab-header');
+      const scrollThreshold = 50;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > scrollThreshold) {
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

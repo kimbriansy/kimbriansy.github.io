@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Publications | Kim Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ua-red: #AB0520;
+      --ua-blue: #00205B;
+      --text-dark: #111;
+      --text-light: #666;
+      --bg-light: #ffffff;
+      --side-bg: #f1f1f1;
+      --highlight: #1abc9c;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: var(--side-bg);
+      color: var(--text-dark);
+      text-align: center;
+      font-size: 1rem;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+      padding: 0 0;
+      background: var(--bg-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 1rem 1rem 1rem;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      will-change: transform, opacity;
+      background: var(--bg-light);
+      z-index: 9999;
+    }
+    header h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.05rem;
+      font-weight: 500;
+    }
+    header h2 {
+      font-weight: 300;
+      font-size: 1.2rem;
+      color: var(--text-light);
+      margin-top: 0.15rem;
+    }
+    header.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    nav.nav-bar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      border-top: 1px solid #D9E5EE;
+      border-bottom: 1px solid #D9E5EE;
+      background: var(--bg-light);
+      z-index: 9998;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 1.05rem;
+      padding-bottom: 3px;
+    }
+    nav a[href="publications.html"] {
+      font-weight: 500;
+      color: #1abc9c;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .topimage {
+      position: relative; /* Needed for text overlay */
+      top: 0;
+      background: var(--bg-light);
+      z-index: 100;
+    }
+    .intro-img {
+      display: block;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      height: 300px;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(90%); /* This darkens the image */
+    }
+    .intro-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2.8rem;
+      font-weight: 600;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .main-content {
+      max-width: 900px;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem;
+      text-align: left;
+      flex: 1;
+    }
+    .main-content h1 {
+        margin-bottom: 2rem;
+        font-size: 1rem; 
+        font-weight: 600; 
+        color: var(--highlight); /* Turquoise color */
+    }
+    /* MODIFIED: The counter is now reset on the list itself */
+    .publications-list {
+        list-style: none;
+        padding-left: 0;
+        counter-reset: publication;
+    }
+    .publications-list li {
+        margin-bottom: 1.5rem;
+        padding-left: 2.5rem;
+        position: relative;
+        color: var(--text-light);
+    }
+    .publications-list li::before {
+        content: counter(publication) ".";
+        counter-increment: publication;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: 300;
+        color: var(--text-dark);
+    }
+    .publications-list a {
+        color: var(--highlight);
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .publications-list a:hover {
+        text-decoration: underline;
+    }
+    .publications-list strong {
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+    /* MODIFIED: New style for the heading within the list */
+    .publications-list li.list-heading {
+        color: var(--highlight);
+        font-weight: 1000;
+        font-size: 1rem;
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+        padding-left: 0; /* Remove padding for heading */
+    }
+    /* MODIFIED: Hide the number for the heading list item */
+    .publications-list li.list-heading::before {
+        content: ""; /* No content */
+        counter-increment: none; /* Do not increment counter */
+    }
+    footer {
+      margin-top: auto;
+      font-size: 0.875rem;
+      color: #aaa;
+      padding: 1.5rem 0;
+      background: var(--bg-light);
+      border-top: 1px solid #D9E5EE;
+    }
+    @media (max-width: 600px) {
+      header h1, .intro-text {
+        font-size: 2rem;
+      }
+      header h2 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <header id="lab-header">
+      <h1>Kim Lab</h1>
+      <h2>Department of Materials Science & Engineering, University of Arizona</h2>
+    </header>
+    <nav class="nav-bar">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="team.html">Team</a>
+        <a href="publications.html"><strong>Publications</strong></a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+    <div class="topimage">
+      <img src="publications.jpeg" alt="Lab visual" class="intro-img" />
+      <div class="intro-text">Publications</div>
+    </div>
+    <div class="main-content">
+      <h1>Submitted</h1>
+      <!-- MODIFIED: Both sections are now inside a single <ol> -->
+      <ol class="publications-list">
+        <li>I. Keren, T. A. Webb, S. Zhang, J. Xu, D. Sun, <strong>B. S. Y. Kim</strong>, D. Shin, S. S. Zhang, J. Zhang, G. Pereira, J. Yao, M. H. Michael, T. Okugawa, J. H. Edgar, S. Wolf, M. Julian, R. P. Prasankumar, K. Miyagawa, K. Kanoda, M. Buzzi, A. Cavalleri, C. R. Dean, D. M. Kennes, A. J. Millis, Q. Li, M. A. Sentef, A. Rubio, A. N. Pasupathy, and D. N. Basov. “Cavity-altered superconductivity probed by Meissner force microscopy,” submitted (2025).</li>
+        
+        <!-- MODIFIED: The heading is now a styled list item -->
+        <li class="list-heading">Peer-Reviewed</li>
+
+        <li>F. L. Ruta, Y. Shao, S. Acharya, A. Mu, N. H. Jo, S. H. Ryu, D. Balatsky, D. Pashov, <strong>B. S. Y. Kim</strong>, M. I. Katsnelson, J. G. Analytis, E. Rotenberg, A. J. Millis, M. van Schilfgaarde, and D. N. Basov. “Good plasmons in a bad metal.” <strong><em>Science</em></strong> 387, 786–791 (2025). <a href="https://doi.org/10.1126/science.adr5926" target="_blank">DOI: 10.1126/science.adr5926</a>.</li>
+        <li>Y. Shao, F. Dirnberger, S. Qiu, S. Acharya, S. Terres, E. Telford, D. Pashov, <strong>B. S. Y. Kim</strong>, F. Ruta, D. G. Chica, Y. Wang, Y. J. Bae, A. J. Millis, M. I. Katsnelson, K. Mosina, Z. Sofer, A. Chernikov, M. van Schilfgaarde, X. Zhu, X. Roy, and D. N. Basov. “Magnetically confined surface and bulk excitons in a layered antiferromagnet.” <strong><em>Nature Mater.</em></strong> 24, 391–398 (2025). <a href="https://doi.org/10.1038/s41563-025-02129-6" target="_blank">DOI: 10.1038/s41563-025-02129-6</a>.</li>
+        <li>H. Park, H. Shin, N. Ali, H. Choi, <strong>B. S. Y. Kim</strong>, B. Kang, M. S. Choi, and W. J. Yoo. “P-type vertical FETs realized by using Fermi-level pinning-free 2D metallic electrodes.” <strong><em>Nano Lett.</em></strong> 25, 368–375 (2025). <a href="https://doi.org/10.1021/acs.nanolett.4c05136" target="_blank">DOI: 10.1021/acs.nanolett.4c05136</a>.</li>
+        <li><strong>B. S. Y. Kim</strong>*,†, T. D. Ngo*, Y. Hassan, S. H. Chae, S.-G. Yoon, and M. S. Choi†. “Advances and applications of oxidized two-dimensional transition metal dichalcogenides.” <strong><em>Adv. Sci.</em></strong> 11, 2407175 (2024). <a href="https://doi.org/10.1002/advs.202407175" target="_blank">DOI: 10.1002/advs.202407175</a>.</li>
+        <li>K. Lee*, <strong>B. S. Y. Kim</strong>*,†, M. S. Choi, N. Ali, H. Shin, G.-H. Kim, J. Hone, and W. J. Yoo†. “Double-side doped 2D TMD FET Channel.” <strong><em>ACS Appl. Electron. Mater.</em></strong> 6, 3894–3900 (2024). <a href="https://doi.org/10.1021/acsaelm.4c00506" target="_blank">DOI: 10.1021/acsaelm.4c00506</a>.</li>
+        <li>F. L. Ruta, S. Zhang, Y. Shao, S. Moore, S. Acharya, Z. Sun, S. Qiu, J. Geurs, <strong>B. S. Y. Kim</strong>, M. Fu, D. G. Chica, D. Pashov, M. Delor, X.-Y. Zhu, A. J. Millis, X. Roy, J. C. Hone, C. R. Dean, M. I. Katsnelson, M. van Schilfgaarde, and D. N. Basov. “Hyperbolic exciton polaritons in a van der Waals magnet.” <strong><em>Nature Commun.</em></strong> 14, 8261 (2023). <a href="https://doi.org/10.1038/s41467-023-44100-6" target="_blank">DOI: 10.1038/s41467-023-44100-6</a>.</li>
+        <li><strong>B. S. Y. Kim</strong>*,†, A. J. Sternbach*, M. Choi*, Z. Sun, F. L. Ruta, Y. Shao, A. McLeod, L. Xiong, Y. Dong, A. Rajendran, S. Liu, A. Niapne, S. H. Chae, A. Zangiabadi, X. Xu, A. J. Millis, P. J. Schuck, C. R. Dean, J. C. Hone, and D. N. Basov†. “Ambipolar charge-transfer graphene plasmonic cavities.” <strong><em>Nature Mater.</em></strong> 22, 838–843 (2023). Featured on Columbia News. <a href="https://doi.org/10.1038/s41563-023-01520-5" target="_blank">DOI: 10.1038/s41563-023-01520-5</a>.</li>
+        <li>A. J. Sternbach, S. Moore, A. Rikhter, S. Zhang, R. Jing, Y. Shao, <strong>B. S. Y. Kim</strong>, S. Xu, A. Rubio, C. Dean, J. Hone, M. Fogler, and D. N. Basov. “Negative refraction in hyperbolic hetero-bicrystals.” <strong><em>Science</em></strong> 379, 555-557 (2023). <a href="https://doi.org/10.1126/science.adf1065" target="_blank">DOI: 10.1126/science.adf1065</a>.</li>
+        <li>S. Chaikasetsin, J. Y. Jung, H. Kim, <strong>B. S. Y. Kim</strong>, F. B. Prinz, J. Choi, K. Bae, and W. Park. “Observation of Highly Anisotropic Thermal Expansion of Polymer Films." <strong><em>ACS Appl. Mater. Interfaces</em></strong> 15, 27166–27172 (2023). <a href="https://doi.org/10.1021/acsami.3c03728" target="_blank">DOI: 10.1021/acsami.3c03728</a>.</li>
+        <li>F. L. Ruta*, <strong>B. S. Y. Kim</strong>*, Z. Sun, D. J. Rizzo, A. Rajendran, S. Liu, A. J. Millis, J. C. Hone, and D. N. Basov. “Surface plasmons induce topological transition in graphene/MoO3 heterostructures.” <strong><em>Nature Commun.</em></strong> 13, 3719 (2022). <a href="https://doi.org/10.1038/s41467-022-31477-z" target="_blank">DOI: 10.1038/s41467-022-31477-z</a>.</li>
+        <li>Y. Shao, A. J. Sternbach, <strong>B. S. Y. Kim</strong>, A. A. Rikhter, X. Xu, U. De Giovannini, R. Jing, S. H. Chae, Z. Sun, Y. Zhu, Z. Mao, J. C. Hone, R. Queiroz, A. J. Millis, P. J. Schuck, A. Rubio, M. M. Fogler, and D. N. Basov. “Hyperbolic plasmons propagate through a nodal metal.” <strong><em>Sci. Adv.</em></strong> 8, eadd6169 (2022). <a href="https://doi.org/10.1126/sciadv.add6169" target="_blank">DOI: 10.1126/sciadv.add6169</a>.</li>
+        <li>Y. Cha, B. Seo, M. Chung, <strong>B. S. Y. Kim</strong>, W. Choi, and W. Park. “Skin-inspired thermometer enabling contact-independent temperature sensation via Seebeck-resistive bimodal system.” <strong><em>ACS Appl. Mater. Interfaces</em></strong> 14, 17920 (2022). <a href="https://doi.org/10.1021/acsami.1c24420" target="_blank">DOI: 10.1021/acsami.1c24420</a>.</li>
+        <li>Y. Kim, T. Kodama, Y. Kim, <strong>B. S. Y. Kim</strong>, C. Ko, J. Lim, and W. Park. “Suppressed phonon conduction by geometrically-induced evolution of transport characteristics from Brownian motion into Lévy walk.” <strong><em>NPG Asia Mater.</em></strong> 14, 33 (2022). <a href="https://doi.org/10.1038/s41427-022-00375-7" target="_blank">DOI: 10.1038/s41427-022-00375-7</a>.</li>
+        <li>M. S. Choi*, A. Nipane*, <strong>B. S. Y. Kim</strong>*, M. E. Ziffer, I. Datta, A. Borah, Y. Jung, B. Kim, D. Rhodes, A. Jindal, Z. A. Lamport, M. Lee, A. Zangiabadi, M. N. Nair, T. Taniguchi, K. Watanabe, I. Kymissis, A. N. Pasupathy, M. Lipson, X. Zhu, W. J. Yoo, J. C. Hone, and J. T. Teherani. “High carrier mobility in graphene doped using a monolayer of tungsten oxyselenide.” <strong><em>Nature Electron.</em></strong> 4, 731 (2021). Cover Image. Featured on Columbia News. <a href="https://doi.org/10.1038/s41928-021-00696-5" target="_blank">DOI: 10.1038/s41928-021-00696-5</a>.</li>
+        <li>A. J. Sternbach, S. H. Chae, S. Latini, A. A. Rikhter, Y. Shao, B. Li, D. Rhodes, <strong>B. S. Y. Kim</strong>, P. J. Schuck, X. Xu, X.-Y. Zhu, R. D. Averitt, J. C. Hone, M. M. Fogler, A. Rubio, and D. N. Basov. “Programmable hyperbolic polaritons in van der Waals semiconductors.” <strong><em>Science</em></strong> 371, 617 (2021). <a href="https://doi.org/10.1126/science.abe9163" target="_blank">DOI: 10.1126/science.abe9163</a>.</li>
+        <li>S. L. Moore, C. J. Ciccarino, D. Halbertal, L. J. McGilly, N. R. Finney, K. Yao, Y. Shao, G. Ni, A. J. Sternbach, E. J. Telford, <strong>B. S. Y. Kim</strong>, S. E. Rossi, K. Watanabe, T. Taniguchi, A. N. Pasupathy, C. R. Dean, J. C. Hone, P. J. Schuck, P. Narang, and D. N. Basov. “Nanoscale lattice dynamics in hexagonal boron nitride moiré superlattices.” <strong><em>Nature Commun.</em></strong> 12, 5741 (2021). <a href="https://doi.org/10.1038/s41467-021-26072-7" target="_blank">DOI: 10.1038/s41467-021-26072-7</a>.</li>
+        <li>S. Chaikasetsin, T. Kodama, K. Bae, J. Y. Jung, J. Shin, B. C. Lee, <strong>B. S. Y. Kim</strong>, J. Seo, U. Sim, F. Prinz, K. E. Goodson, and W. Park. “Thermal expansion characterization of thin films using harmonic Joule heating combined with atomic force microscopy.” <strong><em>Appl. Phys. Lett.</em></strong> 118, 194101 (2021). <a href="https://doi.org/10.1063/5.0049160" target="_blank">DOI: 10.1063/5.0049160</a>.</li>
+        <li>M. E. Berkowitz*, <strong>B. S. Y. Kim</strong>*, G. Ni, A. S. McLeod, C. F. B. Lo, Z. Sun, G. Gu, K. Watanabe, T. Taniguchi, A. J Millis, J. C. Hone, M. M Fogler, R. D. Averitt, and D. N. Basov. “Hyperbolic Cooper-pair polaritons in planar graphene/cuprate plasmonic cavities.” <strong><em>Nano Lett.</em></strong> 21, 308 (2020). <a href="https://doi.org/10.1021/acs.nanolett.0c03684" target="_blank">DOI: 10.1021/acs.nanolett.0c03684</a>.</li>
+        <li>Y. Kim, H. Kwon, H. S. Han, H. K. Kim, <strong>B. S. Y. Kim</strong>, B. C. Lee, J. Lee, M. Asheghi, F. B Prinz, K. E Goodson, J. Lim, U. Sim, and W. Park. “Tunable dielectric and thermal properties of oxide dielectrics via substrate biasing in plasma-enhanced atomic layer deposition.” <strong><em>ACS Appl. Mater. Interfaces</em></strong> 12, 44912 (2020). <a href="https://doi.org/10.1021/acsami.0c11086" target="_blank">DOI: 10.1021/acsami.0c11086</a>.</li>
+        <li>A. J. Sternbach, S. Latini, S. H. Chae, H. Hübener, U. De Giovannini, Y. Shao, L. Xiong, Z. Sun, N. Shi, P. Kissin, G. Ni, D. Rhodes, <strong>B. S. Y. Kim</strong>, N. Yu, A. J. Millis, M. M. Fogler, P. J. Schuck, M. Lipson, X.-Y. Zhu, J. C. Hone, R. D. Averitt, A. Rubio, and D. N. Basov. “Femtosecond exciton dynamics in WSe2 optical waveguides.” <strong><em>Nature Commun.</em></strong> 11, 3567 (2020). <a href="https://doi.org/10.1038/s41467-020-17335-w" target="_blank">DOI: _10.1038/s41467-020-17335-w_</a>.</li>
+        <li><strong>B. S. Y. Kim</strong>*,†, Y. Hikita, T. Yajima, and H. Y. Hwang†. “Heteroepitaxial vertical perovskite hot-electron transistors down to the monolayer limit.” <strong><em>Nature Commun.</em></strong> 10, 5312 (2019). <a href="https://doi.org/10.1038/s41467-019-13290-3" target="_blank">DOI: 10.1038/s41467-019-13290-3</a>.</li>
+        <li><strong>B. S. Y. Kim</strong>*,†, Y. Birkhölzer*, X. Feng, Y. Hikita, and H. Y. Hwang†. “Probing the band alignment in rectifying SrIrO3/Nb:SrTiO3 heterostructures.” <strong><em>Appl. Phys. Lett.</em></strong> 114, 133504 (2019). <a href="https://doi.org/10.1063/1.5087956" target="_blank">DOI: 10.1063/1.5087956</a>.</li>
+        <li><strong>B. S. Y. Kim</strong>†, M. Minohara, Y. Hikita, C. Bell, and H. Y. Hwang†. “Atomically-engineered epitaxial anatase TiO2 metal-semiconductor field-effect transistors.” <strong><em>Appl. Phys. Lett.</em></strong> 112, 133506 (2018). Editor’s Pick. <a href="https://doi.org/10.1063/1.5024418" target="_blank">DOI: 10.1063/1.5024418</a>.</li>
+        <li>W. Park, J. Sohn, G. Romano, T. Kodama, A. Sood, J. S. Katz, <strong>B. S. Y. Kim</strong>, H. So, E. C. Ahn, M. Asheghi, A. M. Kolpak, and K. E. Goodson. “Impact of thermally dead volume on phonon conduction along silicon nanoladders.” <strong><em>Nanoscale</em></strong> 10, 11117 (2018). <a href="https://doi.org/10.1039/c8nr01788c" target="_blank">DOI: 10.1039/c8nr01788c</a>.</li>
+        <li><strong>B. S. Y. Kim</strong>*, W. Zhou*, Y. D. Shah, C. Zhou, N. Işik, and M. Grayson. “Generalized four-point characterization method using capacitive and ohmic contacts.” <strong><em>Rev. Sci. Instrum.</em></strong> 83, 024703 (2012). <a href="https://doi.org/10.1063/1.3677331" target="_blank">DOI: 10.1063/1.3677331</a>.</li>
+      </ol>
+    </div>
+    <footer>
+      &copy; <span id="year"></span> Kim Lab • University of Arizona
+    </footer>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const header = document.getElementById('lab-header');
+      const scrollThreshold = 50;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > scrollThreshold) {
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

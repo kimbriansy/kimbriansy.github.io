@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kim Lab | University of Arizona</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ua-red: #AB0520;
+      --ua-blue: #00205B;
+      --text-dark: #111;
+      --text-light: #666;
+      --bg-light: #ffffff;
+      --side-bg: #f1f1f1;
+      --highlight: #1abc9c; /* #ff0029 */
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+    }
+    /* Using the simpler, more robust background method */
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: var(--side-bg); 
+      color: var(--text-dark);
+      text-align: center;
+      font-size: 1rem;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .topimage {
+      top: 0;
+      background: var(--bg-light);
+      z-index: 100;
+    }
+   /* The content-wrapper gets the white background */
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+      padding: 0 0;
+      background: var(--bg-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-img {
+      height: 40px;          /* adjust as needed */
+      width: auto;
+      display: block;
+    }
+    header {
+      padding: 1rem 1rem 1rem;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      will-change: transform, opacity;
+      background: var(--bg-light);
+      z-index: 9999;
+    }
+    header h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.05rem;
+      font-weight: 500;
+    }
+    header h2 {
+      font-weight: 300;
+      font-size: 1.2rem;
+      color: var(--text-light);
+      margin-top: 0.15rem;
+    }
+    header.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    nav.nav-bar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      border-top: 1px solid #D9E5EE;
+      border-bottom: 1px solid #D9E5EE;
+      background: var(--bg-light);
+      z-index: 9998;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 1.05rem;
+      padding-bottom: 3px;
+    }
+    /* This correctly styles the active "Home" link */
+    nav a[href="index.html"] {
+      font-weight: 500;
+      color: #1abc9c;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .intro {
+      max-width: 900px;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem; /* Added padding for mobile */
+      text-align: left;
+      flex: 1;
+    }
+    .intro p {
+      color: var(--text-light);
+      font-size: 1rem;
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+    .highlight-text {
+      color: #1abc9c;
+      font-weight: 500;
+    }
+    .intro-img {
+        display: block;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto 1rem;
+        height: 300px;
+        object-fit: cover;
+        object-position: center;
+    }
+    .sponsor-logo-img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 1rem;
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: #aaa;
+      padding: 1.5rem 0;
+      background: var(--bg-light);
+      border-top: 1px solid #D9E5EE;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      header h2 {
+        font-size: 1rem;
+      }
+      .logo-img {
+        height: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <header id="lab-header">
+      <h1>Kim Lab</h1>
+      <h2>Department of Materials Science & Engineering, University of Arizona</h2>
+    </header>
+    <nav class="nav-bar">
+      <div class="nav-links">
+        <a href="index.html"><strong>Home</strong></a>
+        <a href="team.html">Team</a>
+        <a href="publications.html">Publications</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+    <div class="topimage">
+      <img src="Main image 1.jpg" alt="Lab visual" class="intro-img" />
+    </div>
+    <div class="intro">
+      <p><span class="highlight-text"><strong>Welcome to the Kim Lab @ UArizona!</strong></span><br><br>
+        
+        The core of our research interest lies at the intersection of experimental condensed matter physics and device physics. We design, manipulate, and probe low-dimensional quantum materials and heterostructures to uncover fundamental light-matter interactions and discover new quantum phenomena and emergent exotic states of matter in condensed matter systems. Our experimental approaches include a combination of state-of-the-art device fabrication and characterization approaches—ranging from robotic nano-manufacturing and assembly to reconfigurable device architectures to multi-modal nano-imaging. We also put a strong emphasis in translating fundamental phenomena discovered in our research into novel functionalities for a new generation of electronic, photonic and quantum technologies.<br><br>
+        
+        <span class="highlight-text"><strong>We are hiring at all levels. Please send us an email with your CV to join the team's quantum endeavors.<br><br>
+        
+        <span class="highlight-text"><strong>Sponsors:</strong></span><br><br>
+        <img src="Sponsor.png" alt="Sponsor Logos" class="sponsor-logo-img">
+      </p>
+    </div>
+    <footer>
+      &copy; <span id="year"></span> Kim Lab • University of Arizona
+    </footer>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const header = document.getElementById('lab-header');
+      const scrollThreshold = 50;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > scrollThreshold) {
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
