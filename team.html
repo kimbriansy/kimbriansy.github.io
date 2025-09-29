@@ -105,7 +105,23 @@
     }
     .nav-logo.visible {
       opacity: 1; /* Made visible by JS */
-      po
+      pointer-events: auto;
+    }
+    /* --- END OF MODIFICATIONS --- */
+    /* nav.nav-bar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      border-top: 1px solid #D9E5EE;
+      border-bottom: 1px solid #D9E5EE;
+      background: var(--bg-light);
+      z-index: 9998;
+      transform: translateZ(0);
+      will-change: transform;
+    } */
     nav a {
       text-decoration: none;
       color: var(--text-dark);
@@ -113,6 +129,7 @@
       font-size: 1.05rem;
       padding-bottom: 3px;
     }
+    /* This correctly styles the active "Home" link */
     nav a[href="team.html"] {
       font-weight: 500;
       color: #1abc9c;
