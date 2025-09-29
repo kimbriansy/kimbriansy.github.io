@@ -3,6 +3,305 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact | Kim Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/wbo2etj.css"> 
+  <style>
+    :root {
+      --ua-red: #AB0520;
+      --ua-blue: #00205B;
+      --text-dark: #111;
+      --text-light: #666;
+      --bg-light: #ffffff;
+      --side-bg: #f1f1f1;
+      --highlight: #1abc9c;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: var(--side-bg); 
+      color: var(--text-dark);
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--bg-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 1rem;
+      background: var(--bg-light);
+      z-index: 9999;
+    }
+    header h1 {
+      font-family: 'trajan-pro-3', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.1rem;
+      font-weight: 400;
+    } 
+    header h2 {
+      font-weight: 300;
+      font-size: 1.2rem;
+      color: var(--text-light);
+      margin-top: 0.15rem;
+    }
+    nav.nav-bar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+      border-top: 1px solid #D9E5EE;
+      border-bottom: 1px solid #D9E5EE;
+      background: var(--bg-light);
+      z-index: 9998;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 1.05rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    /* Assuming this page is linked from a "Team" or "PI" link in the nav */
+    nav a[href="contact.html"] { /* Change this to "team.html" if this page replaces it */
+      font-weight: 500;
+      color: var(--highlight);
+    }
+    .topimage {
+      position: relative;
+    }
+    .intro-img {
+      display: block;
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(90%);
+    }
+    .intro-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2.8rem;
+      font-weight: 600;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .main-content {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      text-align: left;
+      flex: 1;
+    }
+    footer {
+      margin-top: auto;
+      font-size: 0.875rem;
+      color: #aaa;
+      padding: 1.5rem 0;
+      background: var(--bg-light);
+      border-top: 1px solid #D9E5EE;
+    }
+
+    /* --- PI GRID & REPLICATED TEAM-CARD STYLE --- */
+    .pi-grid {
+        display: grid;
+        grid-template-columns: 240px 1fr; /* Fixed width for card, rest for text */
+        gap: 2.5rem; /* Space between card and text */
+        align-items: start; /* Align items to the top of the grid cell */
+    }
+
+    /* Styles for the PI's card, replicating .team-card */
+    .pi-card {
+        border: 1px solid #e0e0e0;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+    }
+    .pi-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        display: block;
+        padding: 0.5rem; /* Internal padding around the image */
+    }
+    .pi-card-info { /* Renamed from team-card-info for specificity */
+        padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .pi-card-info .name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--highlight);
+        margin-bottom: 0;
+    }
+    .pi-card-info .title {
+        color: var(--text-dark);
+        margin: 0.25rem 0;
+        font-size: 1rem;
+        flex-grow: 1;
+    }
+    .pi-card-info .email {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+    .pi-card-info .email:hover {
+        text-decoration: underline;
+    }
+
+    /* Styles for the descriptive text on the right */
+    .pi-description {
+        /* No specific flex/grid properties needed here, it's just the right grid item */
+    }
+    
+    .pi-description h2 {
+        font-family: 'trajan-pro-3', sans-serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+        letter-spacing: 0.05rem;
+    }
+
+    .pi-description p {
+        margin-bottom: 1rem;
+        color: var(--text-light);
+    }
+    
+    .pi-description a {
+        color: var(--highlight);
+        font-weight: 500;
+        text-decoration: none;
+    }
+    
+    .pi-description a:hover {
+        text-decoration: underline;
+    }
+
+    /* --- Responsive adjustments --- */
+    @media (max-width: 800px) {
+      .pi-grid {
+        grid-template-columns: 1fr; /* Stack to 1 column */
+        justify-items: center; /* Center the card when stacked */
+        gap: 2rem; /* Adjust gap when stacked */
+      }
+      .pi-card {
+        max-width: 280px; /* Limit card width when stacked */
+        width: 100%; /* Ensure it takes full width up to max-width */
+      }
+      .pi-description {
+        text-align: left; /* Keep text left-aligned even when stacked */
+      }
+    }
+    @media (max-width: 600px) {
+      header h1, .intro-text { font-size: 2rem; }
+      header h2 { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <header id="lab-header">
+      <h1>KIM LAB</h1>
+      <h2>Department of Materials Science & Engineering, University of Arizona</h2>
+    </header>
+    <nav class="nav-bar">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="team.html">Team</a> 
+        <a href="publications.html">Publications</a>
+        <a href="contact.html"><strong>Contact</strong></a>
+      </div>
+    </nav>
+    <div class="topimage">
+      <img src="Team.png" alt="Lab visual" class="intro-img" />
+      <div class="intro-text">Principal Investigator</div>
+    </div>
+
+    <div class="main-content">
+      <div class="pi-grid">
+        
+        <div class="pi-card"> <img src="Photo.jpeg" alt="Photo of Brian S. Y. Kim">
+          <div class="pi-card-info">
+            <p class="name">Brian S. Y. Kim</p>
+            <p class="title">Assistant Professor<br>
+            Department of MSE<br>
+            Department of Physics</p>
+            <a href="mailto:briankim@arizona.edu" class="email">briankim@arizona.edu</a>
+          </div>
+        </div>
+        
+        <div class="pi-description"> <h2>About Dr. Brian S. Y. Kim</h2>
+          <p>
+            Brian Kim is an assistant professor of materials science and engineering and physics at the University of Arizona. He received his PhD in electrical engineering from Stanford University in 2018 and was a postdoctoral research scientist at Columbia University from 2018 to 2023. He is the recipient of the Outstanding Young Researcher Award (2024), jointly sponsored by the Association of Korean Physicists in America and the Korean Physical Society. He is also a member of APL Photonics Early Career Editorial Advisory Board (2025-26), and Scilog Fellow in Quantum Matter and Information sponsored by RCSA (2025-2027).
+          </p>
+          <p>
+            PhD, Electrical Engineering, Stanford University, 2018<br>
+            MS, Electrical Engineering, Stanford University, 2013<br>
+            BS, Electrical Engineering, Northwestern University, 2011<br>
+            Office: Harshbarger 338D<br>
+            Work Phone: (520) 621-0271<br> 
+            E-mail: briankim@arizona.edu<br>
+            </p>
+          <p>
+             Google Scholar | CV
+          </p>
+        </div>
+
+      </div>
+    </div>
+    
+    <footer>
+      &copy; <span id="year"></span> Kim Lab • University of Arizona
+    </footer>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const header = document.getElementById('lab-header');
+      const scrollThreshold = 50;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > scrollThreshold) {
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+        }
+      });
+    });
+  </script>
+    
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Kim Lab | University of Arizona</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.typekit.net/wbo2etj.css"> 
@@ -208,7 +507,7 @@
         The core of our research interest lies at the intersection of experimental condensed matter physics and device physics. We design, manipulate, and probe low-dimensional quantum materials and heterostructures to uncover fundamental light-matter interactions and discover new quantum phenomena and emergent exotic states of matter in condensed matter systems. Our experimental approaches include a combination of state-of-the-art device fabrication and characterization approaches—ranging from robotic nano-manufacturing and assembly to reconfigurable device architectures to multi-modal nano-imaging. We also put a strong emphasis in translating fundamental phenomena discovered in our research into novel functionalities for a new generation of electronic, photonic and quantum technologies.<br><br>
         
         <!-- Please browse our Publication page to learn more about the research opportunities we offer, and please reach out if you have any questions.<br><br> -->
-      </p>
+      <!-- </p>
     </div>
     <footer>
       &copy; <span id="year"></span> Kim Lab • University of Arizona
@@ -229,4 +528,4 @@
     });
   </script>
 </body>
-</html>
+</html> --> -->
