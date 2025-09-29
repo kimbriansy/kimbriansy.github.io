@@ -236,6 +236,29 @@
     </footer>
   </div>
   <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const header = document.getElementById('lab-header');
+    
+    // ADD THIS LINE to get the new logo element
+    const navLogo = document.getElementById('nav-logo');
+    
+    const scrollThreshold = 50; // The scroll distance when the effect triggers
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > scrollThreshold) {
+        header.classList.add('hidden');
+        // ADD THIS LINE to make the logo visible
+        navLogo.classList.add('visible');
+      } else {
+        header.classList.remove('hidden');
+        // ADD THIS LINE to hide the logo again
+        navLogo.classList.remove('visible');
+      }
+    });
+  });
+</script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("year").textContent = new Date().getFullYear();
       const header = document.getElementById('lab-header');
@@ -248,6 +271,6 @@
         }
       });
     });
-  </script>
+  </script> -->
 </body>
 </html>
