@@ -85,7 +85,38 @@
       opacity: 0;
       pointer-events: none;
     }
+    /* Find your nav.nav-bar style and modify it */
     nav.nav-bar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      /* MODIFIED: Pushes nav links and logo to opposite ends */
+      justify-content: space-between; 
+      align-items: center;
+      padding: 0.75rem 1rem; /* Adjusted padding slightly */
+      border-top: 1px solid #D9E5EE;
+      border-bottom: 1px solid #D9E5EE;
+      background: var(--bg-light);
+      z-index: 9998;
+    }
+    
+    /* ADD THESE NEW STYLES for the logo */
+    .nav-logo {
+      height: 28px; /* Adjust size to fit your nav bar */
+      width: auto;
+      
+      /* Hidden by default */
+      opacity: 0; 
+      
+      /* Smooth transition effect */
+      transition: opacity 0.4s ease; 
+    }
+    
+    .nav-logo.visible {
+      /* This class will be added by JavaScript to show the logo */
+      opacity: 1;
+    }
+    /* nav.nav-bar {
       position: sticky;
       top: 0;
       display: flex;
@@ -98,7 +129,7 @@
       z-index: 9998;
       transform: translateZ(0);
       will-change: transform;
-    }
+    } */
     nav a {
       text-decoration: none;
       color: var(--text-dark);
@@ -180,6 +211,8 @@
         <a href="publications.html">Publications</a>
         <a href="contact.html">Contact</a>
       </div>
+
+      <img src="Logo_UA.jpb" alt="Kim Lab Logo" id="nav-logo" class="nav-logo">
     </nav>
     <div class="topimage">
       <img src="Main image_UA.jpg" alt="Lab visual" class="intro-img" />
