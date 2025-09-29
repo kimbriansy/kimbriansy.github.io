@@ -85,37 +85,47 @@
       opacity: 0;
       pointer-events: none;
     }
-    /* Find your nav.nav-bar style and modify it */
+    /* --- MODIFIED CSS FOR NAV BAR LAYOUT --- */
     nav.nav-bar {
       position: sticky;
       top: 0;
       display: flex;
-      /* MODIFIED: Pushes nav links and logo to opposite ends */
-      justify-content: space-between; 
+      justify-content: space-between; /* Pushes items to the edges */
       align-items: center;
-      padding: 0.75rem 1rem; /* Adjusted padding slightly */
+      padding: 0.75rem 1rem;
       border-top: 1px solid #D9E5EE;
       border-bottom: 1px solid #D9E5EE;
       background: var(--bg-light);
       z-index: 9998;
     }
-    
-    /* ADD THESE NEW STYLES for the logo */
+    .nav-logo-container, .nav-placeholder {
+      flex: 1; /* These take up equal space on the sides */
+    }
+    .nav-logo-container {
+      display: flex; /* Aligns logo to the start of its container */
+      justify-content: flex-start;
+    }
+    .nav-placeholder {
+      display: block; /* This is an empty spacer on the right */
+    }
+    .nav-links {
+      flex: 2; /* Allows the links to take up the central space */
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
     .nav-logo {
-      height: 28px; /* Adjust size to fit your nav bar */
+      height: 28px;
       width: auto;
-      
-      /* Hidden by default */
-      opacity: 0; 
-      
-      /* Smooth transition effect */
-      transition: opacity 0.4s ease; 
+      opacity: 0; /* Hidden by default */
+      transition: opacity 0.4s ease;
+      pointer-events: none;
     }
-    
     .nav-logo.visible {
-      /* This class will be added by JavaScript to show the logo */
-      opacity: 1;
+      opacity: 1; /* Made visible by JS */
+      pointer-events: auto;
     }
+    /* --- END OF MODIFICATIONS --- */
     /* nav.nav-bar {
       position: sticky;
       top: 0;
@@ -205,16 +215,17 @@
       <h2>Department of Materials Science & Engineering, University of Arizona</h2>
     </header>
     <nav class="nav-bar">
+       <div class="nav-logo-container">
+        <img src="Logo_UA.jpg" alt="Kim Lab Logo" id="nav-logo" class="nav-logo">
+      </div>
       <div class="nav-links">
         <a href="index.html"><strong>Home</strong></a>
         <a href="team.html">Team</a>
         <a href="publications.html">Publications</a>
         <a href="contact.html">Contact</a>
       </div>
-
-      <img src="Logo_UA.jpb" alt="Kim Lab Logo" id="nav-logo" class="nav-logo">
-    </nav>
-    <div class="topimage">
+      <div class="nav-placeholder"></div> </nav>
+     <div class="topimage">
       <img src="Main image_UA.jpg" alt="Lab visual" class="intro-img" />
     </div>
     <div class="intro">
@@ -236,28 +247,23 @@
     </footer>
   </div>
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("year").textContent = new Date().getFullYear();
-    const header = document.getElementById('lab-header');
-    
-    // ADD THIS LINE to get the new logo element
-    const navLogo = document.getElementById('nav-logo');
-    
-    const scrollThreshold = 50; // The scroll distance when the effect triggers
-    
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > scrollThreshold) {
-        header.classList.add('hidden');
-        // ADD THIS LINE to make the logo visible
-        navLogo.classList.add('visible');
-      } else {
-        header.classList.remove('hidden');
-        // ADD THIS LINE to hide the logo again
-        navLogo.classList.remove('visible');
-      }
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const header = document.getElementById('lab-header');
+      const navLogo = document.getElementById('nav-logo');
+      const scrollThreshold = 50;
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > scrollThreshold) {
+          header.classList.add('hidden');
+          navLogo.classList.add('visible');
+        } else {
+          header.classList.remove('hidden');
+          navLogo.classList.remove('visible');
+        }
+      });
     });
-  });
-</script>
+  </script>
 <!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("year").textContent = new Date().getFullYear();
