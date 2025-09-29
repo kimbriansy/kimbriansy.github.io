@@ -67,20 +67,38 @@
       opacity: 0;
       pointer-events: none;
     }
+ /* --- MODIFIED CSS FOR NAV BAR LAYOUT --- */
     nav.nav-bar {
       position: sticky;
       top: 0;
       display: flex;
-      justify-content: center;
+      justify-content: space-between; /* Pushes items to the edges */
       align-items: center;
-      padding: 1rem;
+      padding: 0.75rem 1rem;
       border-top: 1px solid #D9E5EE;
       border-bottom: 1px solid #D9E5EE;
       background: var(--bg-light);
       z-index: 9998;
-      transform: translateZ(0);
-      will-change: transform;
     }
+    .nav-logo-container, .nav-placeholder {
+      flex: 1; /* These take up equal space on the sides */
+    }
+    .nav-logo-container {
+      display: flex; /* Aligns logo to the start of its container */
+      justify-content: flex-start;
+    }
+    .nav-placeholder {
+      display: block; /* This is an empty spacer on the right */
+    }
+    .nav-links {
+      flex: 2; /* Allows the links to take up the central space */
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .nav-logo {
+      height: 28px;
+      wi
     nav a {
       text-decoration: none;
       color: var(--text-dark);
@@ -209,12 +227,16 @@
       <h2>Department of Materials Science & Engineering, University of Arizona</h2>
     </header>
     <nav class="nav-bar">
+      <div class="nav-logo-container">
+        <img src="Logo_UA.jpg" alt="Kim Lab Logo" id="nav-logo" class="nav-logo">
+      </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="team.html">Team</a>
         <a href="publications.html"><strong>Publications</strong></a>
         <a href="contact.html">Contact</a>
       </div>
+      <div class="nav-placeholder"></div> </nav>
     </nav>
     <div class="topimage">
       <img src="publications.jpeg" alt="Lab visual" class="intro-img" />
@@ -264,12 +286,16 @@
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("year").textContent = new Date().getFullYear();
       const header = document.getElementById('lab-header');
+      const navLogo = document.getElementById('nav-logo');
       const scrollThreshold = 50;
+      
       window.addEventListener('scroll', () => {
         if (window.scrollY > scrollThreshold) {
           header.classList.add('hidden');
+          navLogo.classList.add('visible');
         } else {
           header.classList.remove('hidden');
+          navLogo.classList.remove('visible');
         }
       });
     });
