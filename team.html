@@ -304,6 +304,50 @@
             grid-template-columns: 1fr; /* 1 column for phones */
       }
     }
+
+    .alumni-section {
+      margin-top: 4rem;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+    .alumni-section h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--highlight);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .alumni-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      text-align: left;
+      min-width: 600px;
+    }
+    .alumni-table th {
+      padding: 1rem 0.5rem;
+      color: var(--text-dark);
+      font-weight: 600;
+      border-bottom: 2px solid #ddd;
+    }
+    .alumni-table td {
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid #f1f1f1;
+      color: var(--text-light);
+    }
+    .alumni-table tr:last-child td {
+      border-bottom: none;
+    }
+    .alumni-table td:first-child {
+      color: var(--text-dark);
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -349,16 +393,6 @@
             <p class="title">Graduate Student<br>
             Department of MSE</p>
             <a href="mailto:tuyenhuynh@arizona.edu" class="email">tuyenhuynh@arizona.edu</a>
-          </div>
-        </div>
-        
-        <div class="team-card">
-          <img src="Owen.jpg" alt="Photo of Owen Lowery">
-          <div class="team-card-info">
-            <p class="name">Owen Lowery</p>
-            <p class="title">Undergraduate Student<br>
-            Department of MSE</p>
-            <a href="mailto:owenlowery@arizona.edu" class="email">owenlowery@arizona.edu</a>
           </div>
         </div>
 
@@ -414,6 +448,39 @@
         
         </div>
     </div>
+
+<div class="alumni-section">
+        <h3>Former Members</h3>
+        
+        <div class="table-responsive">
+          <table class="alumni-table">
+            <thead>
+              <tr>
+                <th width="25%">Name</th>
+                <th width="25%">Period</th>
+                <th width="50%">Next Position</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Owen Lowery (Undergraduate Researcher)</td>
+                <td>07.2024 - 08.2025</td>
+                <td>Undergraduate Student @ University of Arizona</td>
+              </tr>
+              <tr>
+                <td>Jihyo Kim (Visiting Researcher)</td>
+                <td>05.2025 - 08.2025</td>
+                <td>Undergraduate Student @ University of Texas, Austin</td>
+              </tr>
+              <tr>
+                <td>Pio Hong (Visiting Researcher)</td>
+                <td>07.2025 - 08.2025</td>
+                <td>Undergraduate Student @ Seoul National University</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     
     <footer>
       &copy; <span id="year"></span> Kim Lab • University of Arizona
