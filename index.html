@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kim Lab | University of Arizona</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.typekit.net/wbo2etj.css"> 
+  <meta name="description" content="The Kim Lab at the University of Arizona designs, manipulates, and probes low-dimensional quantum materials and heterostructures.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/wbo2etj.css">
   <style>
     :root {
       --ua-red: #AB0520;
-      --ua-blue: #00205B;
-      --text-dark: #111;
-      --text-light: #666;
+      --ua-blue: #0C234B;        /* official Arizona Blue */
+      --highlight: #A95C42;      /* Mesa, from the UA brand palette */
+      --highlight-dark: #8C4A33; /* Mesa, darker for hover */
+      --tint: #F7F1EE;           /* very light Mesa wash */
+      --ink: #23262A;            /* graphite: headings and names */
+      --text-body: #41454B;      /* paragraphs */
+      --text-light: #5E636A;     /* secondary text */
+      --line: #D9E5EE;           /* nav and footer lines */
+      --hairline: #ECEEF1;       /* row dividers */
       --bg-light: #ffffff;
-      --side-bg: #f1f1f1;
-      --highlight: #1abc9c; /* #ff0029 */
+      --side-bg: #EEF0F2;
+      --display: 'trajan-pro-3', Georgia, serif;
     }
     * {
       box-sizing: border-box;
@@ -24,224 +33,297 @@
     html, body {
       height: 100%;
     }
-    /* Using the simpler, more robust background method */
     body {
       font-family: 'Inter', sans-serif;
       font-weight: 300;
-      background: var(--side-bg); 
-      color: var(--text-dark);
+      background: var(--side-bg);
+      color: var(--ink);
       text-align: center;
       font-size: 1rem;
-      padding: 0;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    .topimage {
-      top: 0;
-      background: var(--bg-light);
-      z-index: 100;
+    a {
+      color: var(--highlight);
+      text-decoration: none;
+      transition: color 0.2s ease;
     }
-   /* The content-wrapper gets the white background */
+    a:hover {
+      color: var(--highlight-dark);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    a:focus-visible {
+      outline: 2px solid var(--highlight);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
     .content-wrapper {
       max-width: 1000px;
-      margin: 0 auto 3rem;
-      padding: 0 0;
+      margin: 0 auto;
       background: var(--bg-light);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
-    .logo-img {
-      height: 40px;          /* adjust as needed */
-      width: auto;
-      display: block;
-    }
+
+    /* ---------- Header ---------- */
     header {
-      padding: 1rem 1rem 1rem;
+      padding: 1.6rem 1rem 1.2rem;
+      background: var(--bg-light);
       transition: transform 0.4s ease, opacity 0.4s ease;
       will-change: transform, opacity;
-      background: var(--bg-light);
       z-index: 9999;
     }
-    /* header h1 {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 2.8rem;
-      letter-spacing: 0.05rem;
-      font-weight: 500;
-    } */
     header h1 {
-      font-family: 'trajan-pro-3', sans-serif; /* Use the name from Adobe */
+      font-family: var(--display);
       font-size: 2.8rem;
-      letter-spacing: 0.1rem; /* Trajan looks good with more spacing */
-      font-weight: 400; /* Trajan's regular weight is often 400 */
-    }  
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      padding-left: 0.12em; /* balances the tracking so the title stays centered */
+      line-height: 1.15;
+      color: var(--ink);
+    }
     header h2 {
       font-weight: 300;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: var(--text-light);
-      margin-top: 0.15rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.01em;
     }
     header.hidden {
       transform: translateY(-100%);
       opacity: 0;
       pointer-events: none;
     }
-    /* --- MODIFIED CSS FOR NAV BAR LAYOUT --- */
+
+    /* ---------- Navigation ---------- */
     nav.nav-bar {
       position: sticky;
       top: 0;
       display: flex;
-      justify-content: space-between; /* Pushes items to the edges */
+      justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 1rem;
-      border-top: 1px solid #D9E5EE;
-      border-bottom: 1px solid #D9E5EE;
+      padding: 0.8rem 1.25rem;
+      border-top: 3px solid var(--line);
+      border-bottom: 3px solid var(--line);
       background: var(--bg-light);
       z-index: 9998;
     }
     .nav-logo-container, .nav-placeholder {
-      flex: 1; /* These take up equal space on the sides */
+      flex: 1;
     }
     .nav-logo-container {
-      display: flex; /* Aligns logo to the start of its container */
+      display: flex;
       justify-content: flex-start;
     }
-    .nav-placeholder {
-      display: block; /* This is an empty spacer on the right */
-    }
     .nav-links {
-      flex: 2; /* Allows the links to take up the central space */
+      flex: 2;
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 2.25rem;
     }
     .nav-logo {
       height: 28px;
       width: auto;
-      opacity: 0; /* Hidden by default */
+      opacity: 0; /* shown by the script once you scroll */
       transition: opacity 0.4s ease;
       pointer-events: none;
     }
     .nav-logo.visible {
-      opacity: 1; /* Made visible by JS */
+      opacity: 1;
       pointer-events: auto;
     }
-    /* --- END OF MODIFICATIONS --- */
-    /* nav.nav-bar {
-      position: sticky;
-      top: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-      border-top: 1px solid #D9E5EE;
-      border-bottom: 1px solid #D9E5EE;
-      background: var(--bg-light);
-      z-index: 9998;
-      transform: translateZ(0);
-      will-change: transform;
-    } */
     nav a {
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.2rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    nav a:hover {
+      color: var(--highlight);
       text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
-      font-size: 1.05rem;
-      padding-bottom: 3px;
     }
-    /* This correctly styles the active "Home" link */
-    nav a[href="index.html"] {
-      font-weight: 500;
-      color: #1abc9c;
+    /* The current page's link (set with aria-current="page" in the HTML) */
+    nav a[aria-current="page"] {
+      color: var(--highlight);
+      border-bottom-color: var(--highlight);
     }
-    .nav-links {
-      display: flex;
-      gap: 1rem;
+
+    /* ---------- Banner image ---------- */
+    .topimage {
+      position: relative;
+      background: var(--bg-light);
     }
-    .intro {
-      max-width: 900px;
-      margin: 2rem auto 3rem;
-      padding: 0 1rem; /* Added padding for mobile */
+    .topimage.has-title::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20, 22, 25, 0.30) 0%, rgba(20, 22, 25, 0.50) 100%);
+      pointer-events: none;
+    }
+    .intro-img {
+      display: block;
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .intro-text {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      padding-left: 0.12em;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+      white-space: nowrap;
+    }
+
+    /* ---------- Page body ---------- */
+    .main-content {
+      width: 100%;
+      max-width: 860px;
+      margin: 3.5rem auto 4rem;
+      padding: 0 1.5rem;
       text-align: left;
       flex: 1;
     }
-    .intro p {
+    .section-title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 1.45rem;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 1.6rem;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 2px;
+      margin-top: 0.65rem;
+      background: var(--highlight);
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      margin-top: auto;
+      font-size: 0.85rem;
       color: var(--text-light);
+      letter-spacing: 0.02em;
+      padding: 1.6rem 1rem;
+      background: var(--bg-light);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 720px) {
+      header { padding: 1.2rem 1rem 1rem; }
+      header h1 { font-size: 2.1rem; }
+      header h2 { font-size: 0.92rem; }
+      nav.nav-bar { padding: 0.7rem 1rem; }
+      .nav-logo-container, .nav-placeholder { display: none; }
+      .nav-links { gap: 1.4rem; flex-wrap: wrap; }
+      nav a { font-size: 0.95rem; }
+      .intro-img { height: 200px; }
+      .intro-text { font-size: 1.9rem; }
+      .main-content { margin: 2.5rem auto 3rem; padding: 0 1.25rem; }
+      .section-title { font-size: 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+
+    /* ---------- This page ---------- */
+    .page-home .intro-img {
+      height: 340px;
+    }
+    .intro {
+      width: 100%;
+      max-width: 860px;
+      margin: 3.5rem auto 4rem;
+      padding: 0 1.5rem;
+      text-align: left;
+      flex: 1;
+    }
+    .welcome {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 1.7rem;
+      letter-spacing: 0.06em;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+    .intro p {
+      color: var(--text-body);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 68ch;
+    }
+    .intro p.callout {
+      margin: 2.25rem 0 3.5rem;
+      padding: 1rem 1.25rem;
+      border-left: 3px solid var(--highlight);
+      background: var(--tint);
+      color: var(--ink);
+      font-weight: 400;
       font-size: 1rem;
-      margin-top: 1rem;
-      line-height: 1.6;
+      line-height: 1.7;
     }
-    .highlight-text {
-      color: #1abc9c;
-      font-weight: 500;
-    }
-    .intro-img {
-        display: block;
-        width: 100%;
-        max-width: 1000px;
-        margin: 0 auto 1rem;
-        height: 300px;
-        object-fit: cover;
-        object-position: center;
+    .intro p.sponsor-note {
+      margin-bottom: 1.25rem;
     }
     .sponsor-logo-img {
+      display: block;
       max-width: 100%;
       height: auto;
-      margin-top: 0.5rem;
     }
-    footer {
-      margin-top: 2rem;
-      font-size: 0.875rem;
-      color: #aaa;
-      padding: 1.5rem 0;
-      background: var(--bg-light);
-      border-top: 1px solid #D9E5EE;
-    }
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-      header h2 {
-        font-size: 1rem;
-      }
-      .logo-img {
-        height: 24px;
-      }
+    @media (max-width: 720px) {
+      .page-home .intro-img { height: 220px; }
+      .intro { margin: 2.5rem auto 3rem; padding: 0 1.25rem; }
+      .welcome { font-size: 1.35rem; }
+      .intro p { font-size: 1rem; }
     }
   </style>
 </head>
-<body>
+<body class="page-home">
   <div class="content-wrapper">
     <header id="lab-header">
       <h1>KIM LAB</h1>
-      <h2>Department of Materials Science & Engineering, University of Arizona</h2>
+      <h2>Department of Materials Science &amp; Engineering, University of Arizona</h2>
     </header>
     <nav class="nav-bar">
-       <div class="nav-logo-container">
-        <img src="Logo_UA.jpg" alt="Kim Lab Logo" id="nav-logo" class="nav-logo">
+      <div class="nav-logo-container">
+        <img src="Logo_UA.jpg" alt="University of Arizona logo" id="nav-logo" class="nav-logo">
       </div>
       <div class="nav-links">
-        <a href="index.html"><strong>Home</strong></a>
+        <a href="index.html" aria-current="page">Home</a>
         <a href="team.html">Team</a>
         <a href="publications.html">Publications</a>
         <a href="contact.html">Contact</a>
       </div>
-      <div class="nav-placeholder"></div> </nav>
-     <div class="topimage">
-      <img src="Main-blender.png" alt="Lab visual" class="intro-img" />
-       <!-- Main image_UA.jpg -->
+      <div class="nav-placeholder"></div>
+    </nav>
+    <div class="topimage">
+      <img src="Main-blender.png" alt="Rendering of a two-dimensional crystal lattice" class="intro-img">
     </div>
+    <!-- Alternative banner: Main image_UA.jpg -->
     <div class="intro">
-      <p><span class="highlight-text"><strong>Welcome to the Kim Lab @ UArizona!</strong></span><br><br>
-        
-        The core of our research interest lies at the intersection of experimental condensed matter physics and device physics. We design, manipulate, and probe low-dimensional quantum materials and heterostructures to uncover fundamental light-matter interactions as well as discover new quantum phenomena and emergent exotic states of matter in condensed matter systems. Our experimental approaches include a combination of state-of-the-art device fabrication and characterization approaches—ranging from robotic nano-manufacturing and assembly to reconfigurable device architectures to multi-modal, broadband nano-optical imaging and transport measurements. We also put a strong emphasis in translating fundamental phenomena discovered in our research into novel functionalities for a new generation of electronic, photonic and quantum technologies.<br><br>
-        
-        <span class="highlight-text"><strong>We are hiring at all levels. Please send us an email with your CV if interested in joining the team's quantum endeavors.</span><br><br><br>
-        
-        <span class="highlight-text"><strong>Sponsors:</strong></span><br><br>
-          
-          We gratefully acknowledge support from our sponsors:<br><br>
-          
-        <img src="Sponsor-2026-06.png" alt="Sponsor Logos" class="sponsor-logo-img">
-      </p>
+      <h2 class="welcome">Welcome to the Kim Lab @ UArizona!</h2>
+      <p>The core of our research interest lies at the intersection of experimental condensed matter physics and device physics. We design, manipulate, and probe low-dimensional quantum materials and heterostructures to uncover fundamental light-matter interactions as well as discover new quantum phenomena and emergent exotic states of matter in condensed matter systems. Our experimental approaches include a combination of state-of-the-art device fabrication and characterization approaches—ranging from robotic nano-manufacturing and assembly to reconfigurable device architectures to multi-modal, broadband nano-optical imaging and transport measurements. We also put a strong emphasis in translating fundamental phenomena discovered in our research into novel functionalities for a new generation of electronic, photonic and quantum technologies.</p>
+      <p class="callout">We are hiring at all levels. Please <a href="mailto:briankim@arizona.edu">send us an email</a> with your CV if interested in joining the team's quantum endeavors.</p>
+      <h2 class="section-title">Sponsors</h2>
+      <p class="sponsor-note">We gratefully acknowledge support from our sponsors:</p>
+      <img src="Sponsor-2026-06.png" alt="Sponsor logos" class="sponsor-logo-img">
     </div>
     <footer>
       &copy; <span id="year"></span> Kim Lab • University of Arizona
@@ -253,7 +335,7 @@
       const header = document.getElementById('lab-header');
       const navLogo = document.getElementById('nav-logo');
       const scrollThreshold = 50;
-      
+
       window.addEventListener('scroll', () => {
         if (window.scrollY > scrollThreshold) {
           header.classList.add('hidden');
@@ -265,19 +347,5 @@
       });
     });
   </script>
-<!-- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      document.getElementById("year").textContent = new Date().getFullYear();
-      const header = document.getElementById('lab-header');
-      const scrollThreshold = 50;
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > scrollThreshold) {
-          header.classList.add('hidden');
-        } else {
-          header.classList.remove('hidden');
-        }
-      });
-    });
-  </script> -->
 </body>
 </html>

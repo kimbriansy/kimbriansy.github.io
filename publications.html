@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Kim Lab | University of Arizona</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.typekit.net/wbo2etj.css"> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publications | Kim Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/wbo2etj.css">
   <style>
     :root {
       --ua-red: #AB0520;
-      --ua-blue: #00205B;
-      --text-dark: #111;
-      --text-light: #666;
+      --ua-blue: #0C234B;        /* official Arizona Blue */
+      --highlight: #A95C42;      /* Mesa, from the UA brand palette */
+      --highlight-dark: #8C4A33; /* Mesa, darker for hover */
+      --tint: #F7F1EE;           /* very light Mesa wash */
+      --ink: #23262A;            /* graphite: headings and names */
+      --text-body: #41454B;      /* paragraphs */
+      --text-light: #5E636A;     /* secondary text */
+      --line: #D9E5EE;           /* nav and footer lines */
+      --hairline: #ECEEF1;       /* row dividers */
       --bg-light: #ffffff;
-      --side-bg: #f1f1f1;
-      --highlight: #1abc9c;
+      --side-bg: #EEF0F2;
+      --display: 'trajan-pro-3', Georgia, serif;
     }
     * {
       box-sizing: border-box;
@@ -28,239 +36,291 @@
       font-family: 'Inter', sans-serif;
       font-weight: 300;
       background: var(--side-bg);
-      color: var(--text-dark);
+      color: var(--ink);
       text-align: center;
       font-size: 1rem;
-      padding: 0;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a {
+      color: var(--highlight);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover {
+      color: var(--highlight-dark);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    a:focus-visible {
+      outline: 2px solid var(--highlight);
+      outline-offset: 3px;
+      border-radius: 2px;
     }
     .content-wrapper {
       max-width: 1000px;
-      margin: 0 auto 3rem;
-      padding: 0 0;
+      margin: 0 auto;
       background: var(--bg-light);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
+
+    /* ---------- Header ---------- */
     header {
-      padding: 1rem 1rem 1rem;
+      padding: 1.6rem 1rem 1.2rem;
+      background: var(--bg-light);
       transition: transform 0.4s ease, opacity 0.4s ease;
       will-change: transform, opacity;
-      background: var(--bg-light);
       z-index: 9999;
     }
     header h1 {
-      font-family: 'trajan-pro-3', sans-serif; /* Use the name from Adobe */
+      font-family: var(--display);
       font-size: 2.8rem;
-      letter-spacing: 0.1rem; /* Trajan looks good with more spacing */
-      font-weight: 400; /* Trajan's regular weight is often 400 */
-    }  
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      padding-left: 0.12em; /* balances the tracking so the title stays centered */
+      line-height: 1.15;
+      color: var(--ink);
+    }
     header h2 {
       font-weight: 300;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: var(--text-light);
-      margin-top: 0.15rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.01em;
     }
     header.hidden {
       transform: translateY(-100%);
       opacity: 0;
       pointer-events: none;
     }
- /* --- MODIFIED CSS FOR NAV BAR LAYOUT --- */
+
+    /* ---------- Navigation ---------- */
     nav.nav-bar {
       position: sticky;
       top: 0;
       display: flex;
-      justify-content: space-between; /* Pushes items to the edges */
+      justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 1rem;
-      border-top: 1px solid #D9E5EE;
-      border-bottom: 1px solid #D9E5EE;
+      padding: 0.8rem 1.25rem;
+      border-top: 3px solid var(--line);
+      border-bottom: 3px solid var(--line);
       background: var(--bg-light);
       z-index: 9998;
     }
     .nav-logo-container, .nav-placeholder {
-      flex: 1; /* These take up equal space on the sides */
+      flex: 1;
     }
     .nav-logo-container {
-      display: flex; /* Aligns logo to the start of its container */
+      display: flex;
       justify-content: flex-start;
     }
-   .nav-placeholder {
-      display: block; /* This is an empty spacer on the right */
-    }
     .nav-links {
-      flex: 2; /* Allows the links to take up the central space */
+      flex: 2;
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 2.25rem;
     }
     .nav-logo {
       height: 28px;
       width: auto;
-      opacity: 0; /* Hidden by default */
+      opacity: 0; /* shown by the script once you scroll */
       transition: opacity 0.4s ease;
       pointer-events: none;
     }
     .nav-logo.visible {
-      opacity: 1; /* Made visible by JS */
+      opacity: 1;
       pointer-events: auto;
     }
     nav a {
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.2rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    nav a:hover {
+      color: var(--highlight);
       text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
-      font-size: 1.05rem;
-      padding-bottom: 3px;
     }
-    nav a[href="publications.html"] {
-      font-weight: 500;
-      color: #1abc9c;
+    /* The current page's link (set with aria-current="page" in the HTML) */
+    nav a[aria-current="page"] {
+      color: var(--highlight);
+      border-bottom-color: var(--highlight);
     }
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-    }
+
+    /* ---------- Banner image ---------- */
     .topimage {
-      position: relative; /* Needed for text overlay */
-      top: 0;
+      position: relative;
       background: var(--bg-light);
-      z-index: 100;
+    }
+    .topimage.has-title::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20, 22, 25, 0.30) 0%, rgba(20, 22, 25, 0.50) 100%);
+      pointer-events: none;
     }
     .intro-img {
       display: block;
       width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
       height: 300px;
       object-fit: cover;
       object-position: center;
-      filter: brightness(90%); /* This darkens the image */
     }
     .intro-text {
       position: absolute;
+      z-index: 1;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: white;
-      font-size: 2.8rem;
-      font-weight: 600;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-      text-align: center;
+      color: #ffffff;
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      padding-left: 0.12em;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
       white-space: nowrap;
     }
+
+    /* ---------- Page body ---------- */
     .main-content {
-      max-width: 900px;
-      margin: 2rem auto 3rem;
-      padding: 0 1rem;
+      width: 100%;
+      max-width: 860px;
+      margin: 3.5rem auto 4rem;
+      padding: 0 1.5rem;
       text-align: left;
       flex: 1;
     }
-    .main-content h1 {
-        margin-bottom: 2rem;
-        font-size: 1rem; 
-        font-weight: 600; 
-        color: var(--highlight); /* Turquoise color */
+    .section-title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 1.45rem;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 1.6rem;
     }
-    /* MODIFIED: The counter is now reset on the list itself */
-    .publications-list {
-        list-style: none;
-        padding-left: 0;
-        counter-reset: publication;
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 2px;
+      margin-top: 0.65rem;
+      background: var(--highlight);
     }
-    .publications-list li {
-        margin-bottom: 1.5rem;
-        padding-left: 2.5rem;
-        position: relative;
-        color: var(--text-light);
-    }
-    .publications-list li::before {
-        content: counter(publication) ".";
-        counter-increment: publication;
-        position: absolute;
-        left: 0;
-        top: 0;
-        font-weight: 300;
-        color: var(--text-dark);
-    }
-    .publications-list a {
-        color: var(--highlight);
-        text-decoration: none;
-        font-weight: 500;
-    }
-    .publications-list a:hover {
-        text-decoration: underline;
-    }
-    .publications-list strong {
-        font-weight: 600;
-        color: var(--text-dark);
-    }
-    /* MODIFIED: New style for the heading within the list */
-    .publications-list li.list-heading {
-        color: var(--highlight);
-        font-weight: 600;
-        font-size: 1.5rem;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        padding-left: 0; /* Remove padding for heading */
-    }
-    /* MODIFIED: Hide the number for the heading list item */
-    .publications-list li.list-heading::before {
-        content: ""; /* No content */
-        counter-increment: none; /* Do not increment counter */
-    }
+
+    /* ---------- Footer ---------- */
     footer {
       margin-top: auto;
-      font-size: 0.875rem;
-      color: #aaa;
-      padding: 1.5rem 0;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      letter-spacing: 0.02em;
+      padding: 1.6rem 1rem;
       background: var(--bg-light);
-      border-top: 1px solid #D9E5EE;
+      border-top: 1px solid var(--line);
     }
-    @media (max-width: 600px) {
-      header h1, .intro-text {
-        font-size: 2rem;
-      }
-      header h2 {
-        font-size: 1rem;
-      }
+
+    @media (max-width: 720px) {
+      header { padding: 1.2rem 1rem 1rem; }
+      header h1 { font-size: 2.1rem; }
+      header h2 { font-size: 0.92rem; }
+      nav.nav-bar { padding: 0.7rem 1rem; }
+      .nav-logo-container, .nav-placeholder { display: none; }
+      .nav-links { gap: 1.4rem; flex-wrap: wrap; }
+      nav a { font-size: 0.95rem; }
+      .intro-img { height: 200px; }
+      .intro-text { font-size: 1.9rem; }
+      .main-content { margin: 2.5rem auto 3rem; padding: 0 1.25rem; }
+      .section-title { font-size: 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+
+    /* ---------- This page ---------- */
+    .publications-list {
+      list-style: none;
+      counter-reset: publication;
+    }
+    .publications-list li {
+      position: relative;
+      padding-left: 2.9rem;
+      margin-bottom: 1.4rem;
+      color: var(--text-light);
+      font-size: 0.97rem;
+      line-height: 1.65;
+    }
+    .publications-list li::before {
+      content: counter(publication) ".";
+      counter-increment: publication;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2rem;
+      text-align: right;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-light);
+    }
+    .publications-list a {
+      color: var(--highlight);
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+    .publications-list strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .publications-list li.list-heading {
+      padding-left: 0;
+      margin: 3.5rem 0 0;
+    }
+    .publications-list li.list-heading:first-child {
+      margin-top: 0;
+    }
+    .publications-list li.list-heading::before {
+      content: none;
+      counter-increment: none;
+    }
+    @media (max-width: 720px) {
+      .publications-list li { padding-left: 2.4rem; font-size: 0.93rem; }
+      .publications-list li::before { width: 1.7rem; }
     }
   </style>
 </head>
-<body>
+<body class="page-publications">
   <div class="content-wrapper">
     <header id="lab-header">
       <h1>KIM LAB</h1>
-      <h2>Department of Materials Science & Engineering, University of Arizona</h2>
+      <h2>Department of Materials Science &amp; Engineering, University of Arizona</h2>
     </header>
     <nav class="nav-bar">
       <div class="nav-logo-container">
-        <img src="Logo_UA.jpg" alt="Kim Lab Logo" id="nav-logo" class="nav-logo">
+        <img src="Logo_UA.jpg" alt="University of Arizona logo" id="nav-logo" class="nav-logo">
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="team.html">Team</a>
-        <a href="publications.html"><strong>Publications</strong></a>
+        <a href="publications.html" aria-current="page">Publications</a>
         <a href="contact.html">Contact</a>
       </div>
-      <div class="nav-placeholder"></div></nav>
-    <div class="topimage">
-      <img src="publications.jpeg" alt="Lab visual" class="intro-img" />
+      <div class="nav-placeholder"></div>
+    </nav>
+    <div class="topimage has-title">
+      <img src="publications.jpeg" alt="" class="intro-img">
       <div class="intro-text">Publications</div>
     </div>
     <div class="main-content">
-      <!-- MODIFIED: Both sections are now inside a single <ol> -->
       <ol class="publications-list">
-       <li class="list-heading">Submitted</li>
-        
+        <li class="list-heading"><h2 class="section-title">Submitted</h2></li>
         <li>Q. Yan, T. Li, X. Gao, S. Vaidya, S. Dikshit, Y. Luo, S. Strauf, R. Moukaouine, A. Pershin, A. Gali, Z. Fang, H. Stanfield, I. J. Vera-Marun, M. Newburger, S. Singh, T. Zhu, M. Brotons-Gisbert, K. D. Jöns, B. D. Gerardot, <strong>B. S. Y. Kim</strong>, J. R. Schaibley, K. L. Seyler, J. Balgley, J. Hone, K. C. Fong, L. Wang, G. Burkard, Y. Zeng, T. Heindel, S. Ateş, T. Vogl, and I. Aharonovich. “Roadmap: 2D materials for quantum technologies,” submitted (2026). <a href="https://arxiv.org/abs/2512.14973" target="_blank">DOI: 10.48550/arXiv.2512.14973</a>.</li>
-                
-        <!-- MODIFIED: The heading is now a styled list item -->
-        <li class="list-heading">Peer-Reviewed</li>
-
-        <li>I. Keren, T. A. Webb, S. Zhang, J. Xu, D. Sun, <strong>B. S. Y. Kim</strong>, D. Shin, S. S. Zhang, J. Zhang, G. Pereira, J. Yao, M. H. Michael, T. Okugawa, J. H. Edgar, S. Wolf, M. Julian, R. P. Prasankumar, K. Miyagawa, K. Kanoda, M. Buzzi, A. Cavalleri, C. R. Dean, D. M. Kennes, A. J. Millis, Q. Li, M. A. Sentef, A. Rubio, A. N. Pasupathy, and D. N. Basov. “Cavity-altered superconductivity,” <strong><em>Nature</em></strong> 650, 864–868 (2026). <a href="https://www.nature.com/articles/s41586-025-10062-6" target="_blank">DOI: 10.1038/s41586-025-10062-6</a>.</li> 
-        <li>T. Huynh, H. Y. Lee, and <strong>B. S. Y. Kim</strong>. “Emerging strategies for moiré systems: New knobs, dimensions, and materials,” <strong><em>2D Mater.</em></strong> 13, 022002 (2026). <a href="https://iopscience.iop.org/article/10.1088/2053-1583/ae4ca3" target="_blank">DOI: 10.1088/2053-1583/ae4ca3</a>.</li> 
+        <li class="list-heading"><h2 class="section-title">Peer-Reviewed</h2></li>
+        <li>I. Keren, T. A. Webb, S. Zhang, J. Xu, D. Sun, <strong>B. S. Y. Kim</strong>, D. Shin, S. S. Zhang, J. Zhang, G. Pereira, J. Yao, M. H. Michael, T. Okugawa, J. H. Edgar, S. Wolf, M. Julian, R. P. Prasankumar, K. Miyagawa, K. Kanoda, M. Buzzi, A. Cavalleri, C. R. Dean, D. M. Kennes, A. J. Millis, Q. Li, M. A. Sentef, A. Rubio, A. N. Pasupathy, and D. N. Basov. “Cavity-altered superconductivity,” <strong><em>Nature</em></strong> 650, 864–868 (2026). <a href="https://www.nature.com/articles/s41586-025-10062-6" target="_blank">DOI: 10.1038/s41586-025-10062-6</a>.</li>
+        <li>T. Huynh, H. Y. Lee, and <strong>B. S. Y. Kim</strong>. “Emerging strategies for moiré systems: New knobs, dimensions, and materials,” <strong><em>2D Mater.</em></strong> 13, 022002 (2026). <a href="https://iopscience.iop.org/article/10.1088/2053-1583/ae4ca3" target="_blank">DOI: 10.1088/2053-1583/ae4ca3</a>.</li>
         <li>T. Huynh, N. Lee, Y. Hassan, N. Battulga, K. Muralidharan, O. L. A. Monti, M. S. Choi, and <strong>B. S. Y. Kim</strong>. “Designer charge-transfer van der Waals heterostructures,” <strong><em>Nanoscale</em></strong> 18, 8005–8024 (2026). <a href="https://pubs.rsc.org/nr/article/18/15/8005/1238403/Designer-charge-transfer-van-der-Waals" target="_blank">DOI: 10.1039/d6nr00005c</a>. <strong><em>Nanoscale 2026 Emerging Investigators Themed Collection.</em></strong></li>
         <li>F. L. Ruta, Y. Shao, S. Acharya, A. Mu, N. H. Jo, S. H. Ryu, D. Balatsky, D. Pashov, <strong>B. S. Y. Kim</strong>, M. I. Katsnelson, J. G. Analytis, E. Rotenberg, A. J. Millis, M. van Schilfgaarde, and D. N. Basov. “Good plasmons in a bad metal.” <strong><em>Science</em></strong> 387, 786–791 (2025). <a href="https://doi.org/10.1126/science.adr5926" target="_blank">DOI: 10.1126/science.adr5926</a>.</li>
         <li>Y. Shao, F. Dirnberger, S. Qiu, S. Acharya, S. Terres, E. Telford, D. Pashov, <strong>B. S. Y. Kim</strong>, F. Ruta, D. G. Chica, Y. Wang, Y. J. Bae, A. J. Millis, M. I. Katsnelson, K. Mosina, Z. Sofer, A. Chernikov, M. van Schilfgaarde, X. Zhu, X. Roy, and D. N. Basov. “Magnetically confined surface and bulk excitons in a layered antiferromagnet.” <strong><em>Nature Mater.</em></strong> 24, 391–398 (2025). <a href="https://doi.org/10.1038/s41563-025-02129-6" target="_blank">DOI: 10.1038/s41563-025-02129-6</a>.</li>
@@ -270,7 +330,7 @@
         <li>F. L. Ruta, S. Zhang, Y. Shao, S. Moore, S. Acharya, Z. Sun, S. Qiu, J. Geurs, <strong>B. S. Y. Kim</strong>, M. Fu, D. G. Chica, D. Pashov, M. Delor, X.-Y. Zhu, A. J. Millis, X. Roy, J. C. Hone, C. R. Dean, M. I. Katsnelson, M. van Schilfgaarde, and D. N. Basov. “Hyperbolic exciton polaritons in a van der Waals magnet.” <strong><em>Nature Commun.</em></strong> 14, 8261 (2023). <a href="https://doi.org/10.1038/s41467-023-44100-6" target="_blank">DOI: 10.1038/s41467-023-44100-6</a>.</li>
         <li><strong>B. S. Y. Kim</strong>*,†, A. J. Sternbach*, M. Choi*, Z. Sun, F. L. Ruta, Y. Shao, A. McLeod, L. Xiong, Y. Dong, A. Rajendran, S. Liu, A. Niapne, S. H. Chae, A. Zangiabadi, X. Xu, A. J. Millis, P. J. Schuck, C. R. Dean, J. C. Hone, and D. N. Basov†. “Ambipolar charge-transfer graphene plasmonic cavities.” <strong><em>Nature Mater.</em></strong> 22, 838–843 (2023). Featured on Columbia News. <a href="https://doi.org/10.1038/s41563-023-01520-5" target="_blank">DOI: 10.1038/s41563-023-01520-5</a>.</li>
         <li>A. J. Sternbach, S. Moore, A. Rikhter, S. Zhang, R. Jing, Y. Shao, <strong>B. S. Y. Kim</strong>, S. Xu, A. Rubio, C. Dean, J. Hone, M. Fogler, and D. N. Basov. “Negative refraction in hyperbolic hetero-bicrystals.” <strong><em>Science</em></strong> 379, 555-557 (2023). <a href="https://doi.org/10.1126/science.adf1065" target="_blank">DOI: 10.1126/science.adf1065</a>.</li>
-        <li>S. Chaikasetsin, J. Y. Jung, H. Kim, <strong>B. S. Y. Kim</strong>, F. B. Prinz, J. Choi, K. Bae, and W. Park. “Observation of Highly Anisotropic Thermal Expansion of Polymer Films." <strong><em>ACS Appl. Mater. Interfaces</em></strong> 15, 27166–27172 (2023). <a href="https://doi.org/10.1021/acsami.3c03728" target="_blank">DOI: 10.1021/acsami.3c03728</a>.</li>
+        <li>S. Chaikasetsin, J. Y. Jung, H. Kim, <strong>B. S. Y. Kim</strong>, F. B. Prinz, J. Choi, K. Bae, and W. Park. “Observation of Highly Anisotropic Thermal Expansion of Polymer Films.” <strong><em>ACS Appl. Mater. Interfaces</em></strong> 15, 27166–27172 (2023). <a href="https://doi.org/10.1021/acsami.3c03728" target="_blank">DOI: 10.1021/acsami.3c03728</a>.</li>
         <li>F. L. Ruta*, <strong>B. S. Y. Kim</strong>*, Z. Sun, D. J. Rizzo, A. Rajendran, S. Liu, A. J. Millis, J. C. Hone, and D. N. Basov. “Surface plasmons induce topological transition in graphene/MoO3 heterostructures.” <strong><em>Nature Commun.</em></strong> 13, 3719 (2022). <a href="https://doi.org/10.1038/s41467-022-31477-z" target="_blank">DOI: 10.1038/s41467-022-31477-z</a>.</li>
         <li>Y. Shao, A. J. Sternbach, <strong>B. S. Y. Kim</strong>, A. A. Rikhter, X. Xu, U. De Giovannini, R. Jing, S. H. Chae, Z. Sun, Y. Zhu, Z. Mao, J. C. Hone, R. Queiroz, A. J. Millis, P. J. Schuck, A. Rubio, M. M. Fogler, and D. N. Basov. “Hyperbolic plasmons propagate through a nodal metal.” <strong><em>Sci. Adv.</em></strong> 8, eadd6169 (2022). <a href="https://doi.org/10.1126/sciadv.add6169" target="_blank">DOI: 10.1126/sciadv.add6169</a>.</li>
         <li>Y. Cha, B. Seo, M. Chung, <strong>B. S. Y. Kim</strong>, W. Choi, and W. Park. “Skin-inspired thermometer enabling contact-independent temperature sensation via Seebeck-resistive bimodal system.” <strong><em>ACS Appl. Mater. Interfaces</em></strong> 14, 17920 (2022). <a href="https://doi.org/10.1021/acsami.1c24420" target="_blank">DOI: 10.1021/acsami.1c24420</a>.</li>
@@ -281,7 +341,7 @@
         <li>S. Chaikasetsin, T. Kodama, K. Bae, J. Y. Jung, J. Shin, B. C. Lee, <strong>B. S. Y. Kim</strong>, J. Seo, U. Sim, F. Prinz, K. E. Goodson, and W. Park. “Thermal expansion characterization of thin films using harmonic Joule heating combined with atomic force microscopy.” <strong><em>Appl. Phys. Lett.</em></strong> 118, 194101 (2021). <a href="https://doi.org/10.1063/5.0049160" target="_blank">DOI: 10.1063/5.0049160</a>.</li>
         <li>M. E. Berkowitz*, <strong>B. S. Y. Kim</strong>*, G. Ni, A. S. McLeod, C. F. B. Lo, Z. Sun, G. Gu, K. Watanabe, T. Taniguchi, A. J Millis, J. C. Hone, M. M Fogler, R. D. Averitt, and D. N. Basov. “Hyperbolic Cooper-pair polaritons in planar graphene/cuprate plasmonic cavities.” <strong><em>Nano Lett.</em></strong> 21, 308 (2020). <a href="https://doi.org/10.1021/acs.nanolett.0c03684" target="_blank">DOI: 10.1021/acs.nanolett.0c03684</a>.</li>
         <li>Y. Kim, H. Kwon, H. S. Han, H. K. Kim, <strong>B. S. Y. Kim</strong>, B. C. Lee, J. Lee, M. Asheghi, F. B Prinz, K. E Goodson, J. Lim, U. Sim, and W. Park. “Tunable dielectric and thermal properties of oxide dielectrics via substrate biasing in plasma-enhanced atomic layer deposition.” <strong><em>ACS Appl. Mater. Interfaces</em></strong> 12, 44912 (2020). <a href="https://doi.org/10.1021/acsami.0c11086" target="_blank">DOI: 10.1021/acsami.0c11086</a>.</li>
-        <li>A. J. Sternbach, S. Latini, S. H. Chae, H. Hübener, U. De Giovannini, Y. Shao, L. Xiong, Z. Sun, N. Shi, P. Kissin, G. Ni, D. Rhodes, <strong>B. S. Y. Kim</strong>, N. Yu, A. J. Millis, M. M. Fogler, P. J. Schuck, M. Lipson, X.-Y. Zhu, J. C. Hone, R. D. Averitt, A. Rubio, and D. N. Basov. “Femtosecond exciton dynamics in WSe2 optical waveguides.” <strong><em>Nature Commun.</em></strong> 11, 3567 (2020). <a href="https://doi.org/10.1038/s41467-020-17335-w" target="_blank">DOI: _10.1038/s41467-020-17335-w_</a>.</li>
+        <li>A. J. Sternbach, S. Latini, S. H. Chae, H. Hübener, U. De Giovannini, Y. Shao, L. Xiong, Z. Sun, N. Shi, P. Kissin, G. Ni, D. Rhodes, <strong>B. S. Y. Kim</strong>, N. Yu, A. J. Millis, M. M. Fogler, P. J. Schuck, M. Lipson, X.-Y. Zhu, J. C. Hone, R. D. Averitt, A. Rubio, and D. N. Basov. “Femtosecond exciton dynamics in WSe2 optical waveguides.” <strong><em>Nature Commun.</em></strong> 11, 3567 (2020). <a href="https://doi.org/10.1038/s41467-020-17335-w" target="_blank">DOI: 10.1038/s41467-020-17335-w</a>.</li>
         <li><strong>B. S. Y. Kim</strong>*,†, Y. Hikita, T. Yajima, and H. Y. Hwang†. “Heteroepitaxial vertical perovskite hot-electron transistors down to the monolayer limit.” <strong><em>Nature Commun.</em></strong> 10, 5312 (2019). <a href="https://doi.org/10.1038/s41467-019-13290-3" target="_blank">DOI: 10.1038/s41467-019-13290-3</a>.</li>
         <li><strong>B. S. Y. Kim</strong>*,†, Y. Birkhölzer*, X. Feng, Y. Hikita, and H. Y. Hwang†. “Probing the band alignment in rectifying SrIrO3/Nb:SrTiO3 heterostructures.” <strong><em>Appl. Phys. Lett.</em></strong> 114, 133504 (2019). <a href="https://doi.org/10.1063/1.5087956" target="_blank">DOI: 10.1063/1.5087956</a>.</li>
         <li><strong>B. S. Y. Kim</strong>†, M. Minohara, Y. Hikita, C. Bell, and H. Y. Hwang†. “Atomically-engineered epitaxial anatase TiO2 metal-semiconductor field-effect transistors.” <strong><em>Appl. Phys. Lett.</em></strong> 112, 133506 (2018). Editor’s Pick. <a href="https://doi.org/10.1063/1.5024418" target="_blank">DOI: 10.1063/1.5024418</a>.</li>
@@ -299,7 +359,7 @@
       const header = document.getElementById('lab-header');
       const navLogo = document.getElementById('nav-logo');
       const scrollThreshold = 50;
-      
+
       window.addEventListener('scroll', () => {
         if (window.scrollY > scrollThreshold) {
           header.classList.add('hidden');

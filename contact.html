@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact | Kim Lab</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.typekit.net/wbo2etj.css"> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/wbo2etj.css">
   <style>
     :root {
       --ua-red: #AB0520;
-      --ua-blue: #00205B;
-      --text-dark: #111;
-      --text-light: #666;
+      --ua-blue: #0C234B;        /* official Arizona Blue */
+      --highlight: #A95C42;      /* Mesa, from the UA brand palette */
+      --highlight-dark: #8C4A33; /* Mesa, darker for hover */
+      --tint: #F7F1EE;           /* very light Mesa wash */
+      --ink: #23262A;            /* graphite: headings and names */
+      --text-body: #41454B;      /* paragraphs */
+      --text-light: #5E636A;     /* secondary text */
+      --line: #D9E5EE;           /* nav and footer lines */
+      --hairline: #ECEEF1;       /* row dividers */
       --bg-light: #ffffff;
-      --side-bg: #f1f1f1;
-      --highlight: #1abc9c;
+      --side-bg: #EEF0F2;
+      --display: 'trajan-pro-3', Georgia, serif;
     }
     * {
       box-sizing: border-box;
@@ -27,11 +35,27 @@
     body {
       font-family: 'Inter', sans-serif;
       font-weight: 300;
-      background: var(--side-bg); 
-      color: var(--text-dark);
+      background: var(--side-bg);
+      color: var(--ink);
       text-align: center;
       font-size: 1rem;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a {
+      color: var(--highlight);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover {
+      color: var(--highlight-dark);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    a:focus-visible {
+      outline: 2px solid var(--highlight);
+      outline-offset: 3px;
+      border-radius: 2px;
     }
     .content-wrapper {
       max-width: 1000px;
@@ -41,80 +65,103 @@
       display: flex;
       flex-direction: column;
     }
+
+    /* ---------- Header ---------- */
     header {
-      padding: 1rem;
+      padding: 1.6rem 1rem 1.2rem;
       background: var(--bg-light);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      will-change: transform, opacity;
       z-index: 9999;
     }
     header h1 {
-      font-family: 'trajan-pro-3', sans-serif;
+      font-family: var(--display);
       font-size: 2.8rem;
-      letter-spacing: 0.1rem;
       font-weight: 400;
-    } 
+      letter-spacing: 0.12em;
+      padding-left: 0.12em; /* balances the tracking so the title stays centered */
+      line-height: 1.15;
+      color: var(--ink);
+    }
     header h2 {
       font-weight: 300;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: var(--text-light);
-      margin-top: 0.15rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.01em;
     }
-    /* --- MODIFIED CSS FOR NAV BAR LAYOUT --- */
+    header.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ---------- Navigation ---------- */
     nav.nav-bar {
       position: sticky;
       top: 0;
       display: flex;
-      justify-content: space-between; /* Pushes items to the edges */
+      justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 1rem;
-      border-top: 1px solid #D9E5EE;
-      border-bottom: 1px solid #D9E5EE;
+      padding: 0.8rem 1.25rem;
+      border-top: 3px solid var(--line);
+      border-bottom: 3px solid var(--line);
       background: var(--bg-light);
       z-index: 9998;
     }
     .nav-logo-container, .nav-placeholder {
-      flex: 1; /* These take up equal space on the sides */
+      flex: 1;
     }
     .nav-logo-container {
-      display: flex; /* Aligns logo to the start of its container */
+      display: flex;
       justify-content: flex-start;
     }
-    .nav-placeholder {
-      display: block; /* This is an empty spacer on the right */
-    }
     .nav-links {
-      flex: 2; /* Allows the links to take up the central space */
+      flex: 2;
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 2.25rem;
     }
     .nav-logo {
       height: 28px;
       width: auto;
-      opacity: 0; /* Hidden by default */
+      opacity: 0; /* shown by the script once you scroll */
       transition: opacity 0.4s ease;
       pointer-events: none;
     }
     .nav-logo.visible {
-      opacity: 1; /* Made visible by JS */
+      opacity: 1;
       pointer-events: auto;
     }
     nav a {
-      text-decoration: none;
-      color: var(--text-dark);
+      color: var(--ink);
       font-weight: 500;
-      font-size: 1.05rem;
+      font-size: 1rem;
+      padding: 0.2rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
     }
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-    }
-    /* Assuming this page is linked from a "Team" or "PI" link in the nav */
-    nav a[href="contact.html"] { /* Change this to "team.html" if this page replaces it */
-      font-weight: 500;
+    nav a:hover {
       color: var(--highlight);
+      text-decoration: none;
     }
+    /* The current page's link (set with aria-current="page" in the HTML) */
+    nav a[aria-current="page"] {
+      color: var(--highlight);
+      border-bottom-color: var(--highlight);
+    }
+
+    /* ---------- Banner image ---------- */
     .topimage {
       position: relative;
+      background: var(--bg-light);
+    }
+    .topimage.has-title::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20, 22, 25, 0.30) 0%, rgba(20, 22, 25, 0.50) 100%);
+      pointer-events: none;
     }
     .intro-img {
       display: block;
@@ -122,221 +169,238 @@
       height: 300px;
       object-fit: cover;
       object-position: center;
-      filter: brightness(90%);
     }
     .intro-text {
       position: absolute;
+      z-index: 1;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: white;
-      font-size: 2.8rem;
-      font-weight: 600;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-      text-align: center;
+      color: #ffffff;
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      padding-left: 0.12em;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
       white-space: nowrap;
     }
-    .highlight-text {
-      color: #1abc9c;
-      font-weight: 500;
-    }
+
+    /* ---------- Page body ---------- */
     .main-content {
-      max-width: 900px;
-      margin: 3rem auto;
-      padding: 0 1rem;
+      width: 100%;
+      max-width: 860px;
+      margin: 3.5rem auto 4rem;
+      padding: 0 1.5rem;
       text-align: left;
       flex: 1;
     }
+    .section-title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 1.45rem;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 1.6rem;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 2px;
+      margin-top: 0.65rem;
+      background: var(--highlight);
+    }
+
+    /* ---------- Footer ---------- */
     footer {
       margin-top: auto;
-      font-size: 0.875rem;
-      color: #aaa;
-      padding: 1.5rem 0;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      letter-spacing: 0.02em;
+      padding: 1.6rem 1rem;
       background: var(--bg-light);
-      border-top: 1px solid #D9E5EE;
+      border-top: 1px solid var(--line);
     }
 
-    /* --- PI GRID & REPLICATED TEAM-CARD STYLE --- */
+    @media (max-width: 720px) {
+      header { padding: 1.2rem 1rem 1rem; }
+      header h1 { font-size: 2.1rem; }
+      header h2 { font-size: 0.92rem; }
+      nav.nav-bar { padding: 0.7rem 1rem; }
+      .nav-logo-container, .nav-placeholder { display: none; }
+      .nav-links { gap: 1.4rem; flex-wrap: wrap; }
+      nav a { font-size: 0.95rem; }
+      .intro-img { height: 200px; }
+      .intro-text { font-size: 1.9rem; }
+      .main-content { margin: 2.5rem auto 3rem; padding: 0 1.25rem; }
+      .section-title { font-size: 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+
+    /* ---------- This page ---------- */
     .pi-grid {
-        display: grid;
-        grid-template-columns: 240px 1fr; /* Fixed width for card, rest for text */
-        gap: 2.5rem; /* Space between card and text */
-        align-items: start; /* Align items to the top of the grid cell */
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3.5rem;
+      align-items: start;
     }
-
-    /* Styles for the PI's card, replicating .team-card */
     .pi-card {
-        border: 1px solid #e0e0e0;
-        text-align: left;
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
     .pi-card img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
-        display: block;
-        padding: 0.5rem; /* Internal padding around the image */
-    }
-    .pi-card-info { /* Renamed from team-card-info for specificity */
-        padding: 1rem;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
+      display: block;
+      width: 180px;
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center 30%;
+      padding: 5px;
+      border: 2px solid var(--highlight);
+      border-radius: 50%;
+      margin-bottom: 1.1rem;
     }
     .pi-card-info .name {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--highlight);
-        margin-bottom: 0;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--highlight);
     }
     .pi-card-info .title {
-        color: var(--text-dark);
-        margin: 0.25rem 0;
-        font-size: 1rem;
-        flex-grow: 1;
+      color: var(--text-body);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0.3rem 0 1rem;
     }
     .pi-card-info .sub {
-        color: var(--text-light);
-        font-size: 0.9rem;
-        text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.7;
     }
-    .pi-card-info .email {
-        color: var(--text-light);
-        font-size: 0.9rem;
-        text-decoration: none;
+    .pi-card-info .sub a {
+      color: var(--text-light);
     }
-    .pi-card-info .email:hover {
-        text-decoration: underline;
+    .pi-card-info .sub a:hover {
+      color: var(--highlight);
     }
-
-    /* Styles for the descriptive text on the right */
-    .pi-description {
-        /* No specific flex/grid properties needed here, it's just the right grid item */
+    .pi-card-info .profile-links {
+      margin-top: 0.75rem;
     }
-    
-    .pi-description h2 {
-        font-family: 'trajan-pro-3', sans-serif;
-        font-size: 2rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        margin-bottom: 1rem;
-        letter-spacing: 0.05rem;
-    }
-
     .pi-description p {
-        margin-bottom: 1rem;
-        color: var(--text-light);
+      color: var(--text-body);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      max-width: 68ch;
+      margin-bottom: 3rem;
     }
-    
-    .pi-description a {
-        color: var(--highlight);
-        font-weight: 500;
-        text-decoration: none;
+    .cv-list {
+      list-style: none;
+      margin-bottom: 3rem;
     }
-    
-    .pi-description a:hover {
-        text-decoration: underline;
+    .cv-list li {
+      display: grid;
+      grid-template-columns: 6.5rem 1fr;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--hairline);
+      color: var(--text-body);
+      font-size: 0.97rem;
+      line-height: 1.55;
     }
-
-    /* --- Responsive adjustments --- */
-    @media (max-width: 800px) {
-      .pi-grid {
-        grid-template-columns: 1fr; /* Stack to 1 column */
-        justify-items: center; /* Center the card when stacked */
-        gap: 2rem; /* Adjust gap when stacked */
-      }
-      .pi-card {
-        max-width: 280px; /* Limit card width when stacked */
-        width: 100%; /* Ensure it takes full width up to max-width */
-      }
-      .pi-description {
-        text-align: left; /* Keep text left-aligned even when stacked */
-      }
+    .cv-list li:last-child {
+      border-bottom: none;
     }
-    @media (max-width: 600px) {
-      header h1, .intro-text { font-size: 2rem; }
-      header h2 { font-size: 1rem; }
+    .cv-list .year {
+      color: var(--text-light);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+    @media (max-width: 760px) {
+      .pi-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .pi-card { justify-self: center; }
+      .cv-list li { grid-template-columns: 5.5rem 1fr; gap: 0.75rem; font-size: 0.93rem; }
     }
   </style>
 </head>
-<body>
+<body class="page-contact">
   <div class="content-wrapper">
     <header id="lab-header">
       <h1>KIM LAB</h1>
-      <h2>Department of Materials Science & Engineering, University of Arizona</h2>
+      <h2>Department of Materials Science &amp; Engineering, University of Arizona</h2>
     </header>
     <nav class="nav-bar">
       <div class="nav-logo-container">
-        <img src="Logo_UA.jpg" alt="Kim Lab Logo" id="nav-logo" class="nav-logo">
+        <img src="Logo_UA.jpg" alt="University of Arizona logo" id="nav-logo" class="nav-logo">
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="team.html">Team</a> 
+        <a href="team.html">Team</a>
         <a href="publications.html">Publications</a>
-        <a href="contact.html"><strong>Contact</strong></a>
+        <a href="contact.html" aria-current="page">Contact</a>
       </div>
-      <div class="nav-placeholder"></div> </nav>
-    <div class="topimage">
-      <img src="UA2.jpg" alt="Lab visual" class="intro-img" />
+      <div class="nav-placeholder"></div>
+    </nav>
+    <div class="topimage has-title">
+      <img src="UA2.jpg" alt="" class="intro-img">
       <div class="intro-text">Contact</div>
     </div>
-
     <div class="main-content">
       <div class="pi-grid">
-        
-        <div class="pi-card"> <img src="Photo.jpeg" alt="Photo of Brian S. Y. Kim">
+
+        <div class="pi-card">
+          <img src="Photo.jpeg" alt="Photo of Brian S. Y. Kim">
           <div class="pi-card-info">
             <p class="name">Brian S. Y. Kim</p>
             <p class="title">Assistant Professor<br>
             Department of MSE<br>
             Department of Physics</p>
-            
             <p class="sub">Harshbarger 338D<br>
-            (520) 621-0271<br> 
-            briankim@arizona.edu<br><br>
-            <a href="https://scholar.google.com/citations?user=jwLoqMMAAAAJ&hl=en" class="email">Google Scholar</a> | <a href="https://raw.githubusercontent.com/kimbriansy/kimbriansy.github.io/main/CV_Brian%20SY%20Kim.pdf" class="email">CV</a></p>
+            <a href="tel:+15206210271">(520) 621-0271</a><br>
+            <a href="mailto:briankim@arizona.edu">briankim@arizona.edu</a></p>
+            <p class="sub profile-links"><a href="https://scholar.google.com/citations?user=jwLoqMMAAAAJ&amp;hl=en">Google Scholar</a> | <a href="https://raw.githubusercontent.com/kimbriansy/kimbriansy.github.io/main/CV_Brian%20SY%20Kim.pdf">CV</a></p>
           </div>
         </div>
-        
+
         <div class="pi-description">
-          <p>
-            Brian Kim is an assistant professor of materials science and engineering and physics at the University of Arizona. He received his PhD in electrical engineering from Stanford University in 2018 and was a postdoctoral research scientist at Columbia University from 2018 to 2023. His research interests include designing and engineering low-dimensional quantum materials and heterostructures from the atomic level to the system level for a new generation of electronic, photonic and quantum technologies.
-          </p>
-          <p>
-            PhD, Electrical Engineering, Stanford University, 2018<br>
-            MS, Electrical Engineering, Stanford University, 2013<br>
-            BS, Electrical Engineering, Northwestern University, 2011<br><br>
-         
-            <span class="highlight-text"><strong>Honors & Awards:</strong></span><br>
-            
-            2026, Doctoral New Investigator Award, ACS Petroleum Research Fund<br>
-            2026, Ralph E. Powe Junior Faculty Enhancement Award, ORAU<br>
-            2026, Nanoscale Emerging Investigator Award, Royal Society of Chemistry<br> 
-            2025-2027, Scialog Fellow in Quantum Matter and Information, RCSA<br>
-            2025-2026, Member, APL Photonics Early Career Editorial Advisory Board<br>
-            2024, Outstanding Young Researcher Award, AKPA & KPS <br><br>
-            </p>
-          <!-- <p>
-             <a href="https://scholar.google.com/citations?user=jwLoqMMAAAAJ&hl=en" target="_blank">Google Scholar</a> | <a href="https://raw.githubusercontent.com/kimbriansy/kimbriansy.github.io/main/CV_Brian%20SY%20Kim.pdf" target="_blank">Curriculum Vitae</a>
-          </p> -->
+          <p>Brian Kim is an assistant professor of materials science and engineering and physics at the University of Arizona. He received his PhD in electrical engineering from Stanford University in 2018 and was a postdoctoral research scientist at Columbia University from 2018 to 2023. His research interests include designing and engineering low-dimensional quantum materials and heterostructures from the atomic level to the system level for a new generation of electronic, photonic and quantum technologies.</p>
+
+          <h2 class="section-title">Education</h2>
+          <ul class="cv-list">
+            <li><span class="year">2018</span><span>PhD, Electrical Engineering, Stanford University</span></li>
+            <li><span class="year">2013</span><span>MS, Electrical Engineering, Stanford University</span></li>
+            <li><span class="year">2011</span><span>BS, Electrical Engineering, Northwestern University</span></li>
+          </ul>
+
+          <h2 class="section-title">Honors &amp; Awards</h2>
+          <ul class="cv-list">
+            <li><span class="year">2026</span><span>Doctoral New Investigator Award, ACS Petroleum Research Fund</span></li>
+            <li><span class="year">2026</span><span>Ralph E. Powe Junior Faculty Enhancement Award, ORAU</span></li>
+            <li><span class="year">2026</span><span>Nanoscale Emerging Investigator Award, Royal Society of Chemistry</span></li>
+            <li><span class="year">2025–2027</span><span>Scialog Fellow in Quantum Matter and Information, RCSA</span></li>
+            <li><span class="year">2025–2026</span><span>Member, APL Photonics Early Career Editorial Advisory Board</span></li>
+            <li><span class="year">2024</span><span>Outstanding Young Researcher Award, AKPA &amp; KPS</span></li>
+          </ul>
         </div>
 
       </div>
     </div>
-    
     <footer>
       &copy; <span id="year"></span> Kim Lab • University of Arizona
     </footer>
   </div>
- <script>
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("year").textContent = new Date().getFullYear();
       const header = document.getElementById('lab-header');
       const navLogo = document.getElementById('nav-logo');
       const scrollThreshold = 50;
-      
+
       window.addEventListener('scroll', () => {
         if (window.scrollY > scrollThreshold) {
           header.classList.add('hidden');
@@ -348,6 +412,5 @@
       });
     });
   </script>
-    
 </body>
 </html>
