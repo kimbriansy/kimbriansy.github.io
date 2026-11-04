@@ -24,9 +24,9 @@
     :root {
       --ua-red: #AB0520;
       --ua-blue: #0C234B;        /* official Arizona Blue */
-      --highlight: #A95C42;      /* Mesa, from the UA brand palette */
-      --highlight-dark: #8C4A33; /* Mesa, darker for hover */
-      --tint: #F7F1EE;           /* very light Mesa wash */
+      --highlight: #8B0015;      /* Chili, UA deep red */
+      --highlight-dark: #6E0011; /* Chili, darker for hover */
+      --tint: #F9EEF0;           /* very light Chili wash */
       --ink: #23262A;            /* graphite: headings and names */
       --text-body: #41454B;      /* paragraphs */
       --text-light: #5E636A;     /* secondary text */
@@ -73,7 +73,7 @@
       max-width: 1000px;
       margin: 0 auto;
       background: var(--bg-light);
-      border-top: 4px solid var(--highlight); /* Mesa band across the top */
+      border-top: 4px solid var(--highlight); /* accent band across the top */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -220,7 +220,7 @@
     .section-title::after {
       content: "";
       display: block;
-      width: 32px;
+      width: 64px;
       height: 2px;
       margin-top: 0.65rem;
       background: var(--highlight);
@@ -268,7 +268,7 @@
       align-items: center;
       text-align: center;
     }
-    /* Circular portrait with a thin Mesa ring */
+    /* Circular portrait with a thin accent ring */
     .team-card img {
       display: block;
       width: 200px;
